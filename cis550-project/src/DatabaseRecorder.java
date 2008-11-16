@@ -60,14 +60,15 @@ public class DatabaseRecorder {
 		    // create and execute query
 		    PreparedStatement pstmt = conn.prepareStatement("INSERT INTO STORIES (url, title, " + 
 		    		                                                            "private, description, votes, " +
-		    		                                                            "category) " +
-		    		                                                     "VALUES (?, ?, ?, ?, ?, ?)");
+		    		                                                            "category, name) " +
+		    		                                                     "VALUES (?, ?, ?, ?, ?, ?, ?)");
 		    pstmt.setString(1, s.getURL());
 		    pstmt.setString(2, s.getTitle());
 		    pstmt.setInt(3, s.getPrivate());
 		    pstmt.setString(4, s.getDescription() );
 		    pstmt.setInt(5, 0);
 		    pstmt.setString(6, s.getCategory());
+		    pstmt.setString(7, s.getName());
 		    	     
 			System.out.println(pstmt);
 		    pstmt.executeUpdate();

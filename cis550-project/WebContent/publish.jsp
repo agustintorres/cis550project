@@ -16,7 +16,7 @@
 Title: <input name="title" type="text" /> <br>
 URL: <input name="url" type="text" /> <br>
 Description: <br><textarea name="description" cols = 40 rows = 10 /> </textarea> <br>
-
+name: <input name="name" type="text" /> <br>
 Category:
 <select name = "category">
   <option value ="News">News</option>

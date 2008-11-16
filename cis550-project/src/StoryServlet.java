@@ -27,6 +27,7 @@ public class StoryServlet extends HttpServlet {
 		String description = req.getParameter("description");
 		String category = req.getParameter("category");
 		String isprivate = req.getParameter("private");
+		String name =  req.getParameter("name");
 
 
 		PrintWriter out = resp.getWriter();
@@ -42,6 +43,7 @@ public class StoryServlet extends HttpServlet {
 		out.println("The paramter description was \"" + description + "\".");
 		out.println("The paramter category was \"" + category + "\".");
 		out.println("The paramter private was \"" + isprivate + "\".");
+		out.println("The paramter name was \"" + name + "\".");
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
@@ -51,7 +53,7 @@ public class StoryServlet extends HttpServlet {
 		//}
 
 		System.out.println("h11");
-		Story story = new Story(title, description, url, category, yes);
+		Story story = new Story(title, description, url, category, yes, name);
 		DatabaseRecorder dr = new DatabaseRecorder();
 		dr.recordStory(story);
 		System.out.println("hi2");
