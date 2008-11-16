@@ -25,5 +25,12 @@ public class Story {
 		public String getURL() { return url; }
 		public String getCategory() { return category; }
 		public int getPrivate() { return isPrivate; }
+		
+		public void setTitle(String t) {  title = t; }
+		public void setName(String n){ name = n;}
+		public void setDescription(String d) {  description= d; }
+		public void setURL(String u) {  url = u; }
+		public void setCategory(String c) {  category = c; }
+		public int setPrivate(int p) {  isPrivate = p; }
 			
 }
