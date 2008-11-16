@@ -28,10 +28,23 @@
       <servlet-name>RegisterServlet</servlet-name>
       <servlet-class>RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>
+    	StoryServlet</display-name>
+    	<servlet-name>StoryServlet</servlet-name>
+    	<servlet-class>
+    	StoryServlet</servlet-class>
+    </servlet>
  
     <!-- RegisterServlet mapping -->
     <servlet-mapping>
       <servlet-name>RegisterServlet</servlet-name>
       <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>StoryServlet</servlet-name>
+    	<url-pattern>/StoryServlet</url-pattern>
     </servlet-mapping>
 </web-app>
