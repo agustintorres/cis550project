@@ -21,10 +21,15 @@
 
 package example;
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
+import example.Story;
 /**
  * <code>Set welcome message.</code>
  */
 public class HelloWorld extends ExampleSupport {
+
+	private List<Story> stories;
 
     public String execute() throws Exception {
 		String myout = "";
@@ -44,10 +49,33 @@ public class HelloWorld extends ExampleSupport {
 			
 			Statement stmt = conn.createStatement();
 			//ResultSet rs = stmt.executeQuery("SELECT * from <tablename>");
-			ResultSet rs = stmt.executeQuery("SHOW TABLES");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM STORIES");
+			
+			stories = new ArrayList<Story>();
+			Story tempStory = new Story();
 			while (rs.next()) {
+			
+				// retrieve and print the values for the current row
+				String myurl = rs.getString("url");
+				String mytitle = rs.getString("title");
+				String myname = rs.getString("name");
+				int myprivate = rs.getInt("private");
+				String mydescription = rs.getString("description");
+				String mystorytime = rs.getString("storytime");
+				int myvotes = rs.getInt("votes");
+				String mycategory = rs.getString("category");
+				
+				tempStory.setTitle(mytitle);
+				tempStory.setName(myname);
+				tempStory.setDescription(mydescription);
+				tempStory.setURL(myurl);
+				tempStory.setCategory(mycategory);
+				tempStory.setPrivate(myprivate);
+				
+				stories.add(tempStory);
+				//myout += ("<br> STORY = " + myurl + "||" + mytitle + "||" + mydescription + "|END| ");
 				//System.out.println(rs.getString(1));
-				myout += (rs.getString(1) + "\n");
+				//myout += (rs.getString(1) + "|| ");
 			}
 
 			rs.close();
@@ -61,7 +89,7 @@ public class HelloWorld extends ExampleSupport {
 			System.out.println("VendorError:  " + E.getErrorCode());
 		}	
         //setMessage(getText(MESSAGE));
-		setMessage(myout);
+		//setMessage(myout);
         return SUCCESS;
     }
 
@@ -73,15 +101,15 @@ public class HelloWorld extends ExampleSupport {
     /**
      * Field for Message property.
      */
-    private String message;
+    //private String stories;
 
     /**
      * Return Message property.
      *
      * @return Message property
      */
-    public String getMessage() {
-        return message;
+    public List<Story> getStories() {
+        return stories;
     }
 
     /**
@@ -89,8 +117,8 @@ public class HelloWorld extends ExampleSupport {
      *
      * @param message Text to display on HelloWorld page.
      */
-    public void setMessage(String message) {
-        this.message = message;
+    public void setStories(List<Story> stories) {
+        this.stories = stories;
     }
 }
 
