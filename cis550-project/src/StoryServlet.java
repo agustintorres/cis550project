@@ -46,9 +46,9 @@ public class StoryServlet extends HttpServlet {
 		out.println("</html>");
 		out.flush();
 		
-		if (isprivate.equals("private")){
-			int yes = 1;
-		}
+		//if (isprivate != null & isprivate.equals("private")){
+			//int yes = 1;
+		//}
 
 		System.out.println("h11");
 		Story story = new Story(title, url, description, category, yes);
