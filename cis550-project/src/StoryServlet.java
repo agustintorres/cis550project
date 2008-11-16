@@ -51,7 +51,7 @@ public class StoryServlet extends HttpServlet {
 		//}
 
 		System.out.println("h11");
-		Story story = new Story(title, url, description, category, yes);
+		Story story = new Story(title, description, url, category, yes);
 		DatabaseRecorder dr = new DatabaseRecorder();
 		dr.recordStory(story);
 		System.out.println("hi2");
