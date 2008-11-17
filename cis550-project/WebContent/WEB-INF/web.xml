@@ -28,6 +28,8 @@
       <servlet-name>RegisterServlet</servlet-name>
       <servlet-class>RegisterServlet</servlet-class>
     </servlet>
+    
+    <!-- Declare the existence of Story ServletServlet -->
     <servlet>
     	<description>
     	</description>
@@ -37,14 +39,28 @@
     	<servlet-class>
     	StoryServlet</servlet-class>
     </servlet>
+    
+    <!-- Declare the existence of AddFriendServlet -->
+    <servlet>
+      <servlet-name>AddFriendServlet</servlet-name>
+      <servlet-class>AddFriendServlet</servlet-class>
+    </servlet>
  
     <!-- RegisterServlet mapping -->
     <servlet-mapping>
       <servlet-name>RegisterServlet</servlet-name>
       <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    
+    <!-- StoryServlet mapping -->
     <servlet-mapping>
     	<servlet-name>StoryServlet</servlet-name>
     	<url-pattern>/StoryServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!-- AddFriendServlet mapping -->
+    <servlet-mapping>
+      <servlet-name>AddFriendServlet</servlet-name>
+      <url-pattern>/addfriend</url-pattern>
     </servlet-mapping>
 </web-app>

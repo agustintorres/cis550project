@@ -31,6 +31,6 @@ public class Story {
 		public void setDescription(String d) {  description= d; }
 		public void setURL(String u) {  url = u; }
 		public void setCategory(String c) {  category = c; }
-		public int setPrivate(int p) {  isPrivate = p; }
+		public void setPrivate(int p) {  isPrivate = p; }
 			
 }
