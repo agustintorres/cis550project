@@ -1,60 +1,85 @@
-CREATE TABLE Users
-(
-    userid INTEGER,
-    name VARCHAR2(20) NOT NULL,
-    age INTEGER NULL,
-    location VARCHAR2(50) NULL,
-    profession VARCHAR2(50) NULL,
-    PRIMARY KEY (userid)
+create table USERS 
+( 
+   name VARCHAR(20) PRIMARY KEY,
+password VARCHAR(20) NOT NULL, 
+    dob DATE NULL, 
+    location VARCHAR(50) NULL, 
+    profession VARCHAR(50) NULL 
+); 
+  
+create table FRIENDS 
+( 
+	pending INTEGER NOT NULL,
+    uid1 INTEGER references USERS(uid), 
+    uid2 INTEGER references USERS(uid), 
+    primary key (uid1, uid2) 
+     
 );
 
-CREATE TABLE Friends
-(
-    uid1 INTEGER,
-    uid2 INTEGER, 
-    FOREIGN KEY (uid1) REFERENCES Users(userid),
-    FOREIGN KEY (uid2) REFERENCES Users(userid),
-    PRIMARY KEY (uid1, uid2)
+CREATE TABLE STORIES 
+( 
+    url VARCHAR(255) NOT NULL, 
+	storyid INTEGER PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(20) NOT NULL,
+    title VARCHAR(255) NOT NULL, 
+    private INTEGER NOT NULL, 
+    description VARCHAR(2000) NULL, 
+    storytime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+    votes INTEGER NOT NULL, 
+	category VARCHAR(50) NOT NULL,
+	foreign key (name) references USERS(name),
+	foreign key (Category) references CATEGORIES(category)
 );
 
-CREATE TABLE Stories
+CREATE TABLE CATEGORIES
 (
-    url VARCHAR2(255),
-    title VARCHAR2(255) NOT NULL,
-    private INTEGER NOT NULL,
-    description VARCHAR2(2000) NULL,
-    storydate DATE NOT NULL,
-    category VARCHAR2(50) NOT NULL,
-    votes INTEGER NOT NULL,
-    submitter INTEGER,
-    PRIMARY KEY (url),
-    FOREIGN KEY (submitter) REFERENCES USERS(userid)
+	Category VARCHAR(50) PRIMARY KEY
+);
+ 
+
+
+CREATE TABLE POSTS
+(
+	cid INTEGER NOT NULL,
+	uid INTEGER NOT NULL,
+	url VARCHAR(255) NOT NULL,
+PRIMARY KEY (cid, uid, url),
+FOREIGN KEY (cid) REFERENCES COMMENTS,
+FOREIGN KEY (uid) REFERENCES USERS,
+FOREIGN KEY (url) REFERENCES STORIES
+
+);
+  
+CREATE TABLE COMMENTS 
+( 
+    cid INTEGER AUTO_INCREMENT PRIMARY KEY, 
+    text VARCHAR(2000) NOT NULL, 
+	parent INTEGER NOT NULL,
+    commenttime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (parent) REFERENCES COMMENTS(cid) 
 );
 
-CREATE TABLE COMMENTS
-(
-    cid INTEGER PRIMARY KEY,
-    text VARCHAR2(2000) NOT NULL,
-    commentdate DATE NOT NULL,
-    parent INTEGER,
-    commenter INTEGER,
-    FOREIGN KEY (parent) REFERENCES COMMENTS(cid),
-    FOREIGN KEY (commenter) REFERENCES USERS(userid)
-);
-
-CREATE TABLE ParentOf
-(
-    cidself PRIMARY KEY,
-    cidparent NOT NULL,
-    FOREIGN KEY (cidself) REFERENCES COMMENTS(cid),
-    FOREIGN KEY (cidparent) REFERENCES COMMENTS(cid)
+create table PARENTOF 
+( 
+    cidself INTEGER PRIMARY KEY, 
+    cidparent INTEGER NOT NULL,
+    foreign key (cidself) references COMMENTS(cid),
+    foreign key (cidparent) references COMMENTS(cid) 
 ); 
 
-CREATE TABLE Votes
+create table VOTES
 (
-    userid INTEGER,
-    url VARCHAR(255),
-    FOREIGN KEY (userid) references USERS (userid),
-    FOREIGN KEY (url) references STORIES(url),
-    PRIMARY KEY (userid, url)
+    uid INTEGER NOT NULL, 
+url VARCHAR(255) NOT NULL, 
+foreign key (uid) references USERS(uid), 
+foreign key (url) references STORIES(url), 
+primary key(uid, url)
+);
+
+create table INVINDEX
+(
+   word VARCHAR(255) NOT NULL,
+   docid INTEGER NOT NULL,
+   foreign key (docid) references STORIES(storyid),
+   PRIMARY KEY (word, docid)
 );
