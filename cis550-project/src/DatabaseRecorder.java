@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.LinkedList;
 
 public class DatabaseRecorder {
 	
@@ -102,6 +103,32 @@ public class DatabaseRecorder {
 		System.out.println("query was executed successfully!");
 	    
 		// close statement, connection, and output stream
+		pstmt.close();
+		conn.close();
+	    } catch (java.lang.Exception ex) {
+
+	        ex.printStackTrace();
+	    }
+	}
+	
+	public void recordIndex(LinkedList<String> words, int sid){
+		try {
+			
+		Connection conn = getConnection();
+		
+		PreparedStatement pstmt = conn.prepareStatement("INSERT INTO INVINDEX (word, docid) " +  
+        																			"VALUES (?, ?)");
+		for(int x = 0; x < words.size(); x++){
+		
+	    pstmt.setString(1, words.get(x));
+	    pstmt.setInt(2, sid);
+		
+		System.out.println(pstmt);
+	    pstmt.executeUpdate();
+		System.out.println("query was executed successfully!");
+		
+		}
+		
 		pstmt.close();
 		conn.close();
 	    } catch (java.lang.Exception ex) {

@@ -57,6 +57,10 @@ public class StoryServlet extends HttpServlet {
 		DatabaseRecorder dr = new DatabaseRecorder();
 		dr.recordStory(story);
 		System.out.println("hi2");
+		//change hard code
+		InputInvertIndex iii = new InputInvertIndex(story, 1);
+		iii.recordStuff();
+		System.out.println("hi3");
 	}
 
 }
