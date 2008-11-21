@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseReader {
 	
@@ -20,6 +21,87 @@ public class DatabaseReader {
 		}
 	}
 	
+	public ArrayList<Story> getStories(int i) {
+		ArrayList<Story> myStories = new ArrayList<Story>();
+		
+		try {
+			
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM STORIES");
+			while(rs.next())
+			{
+				Story tempStory = new Story();
+				// retrieve and print the values for the current row
+				String myurl = rs.getString("url");
+				String mytitle = rs.getString("title");
+				String myname = rs.getString("name");
+				int myprivate = rs.getInt("private");
+				String mydescription = rs.getString("description");
+				String mystorytime = rs.getString("storytime");
+				int myvotes = rs.getInt("votes");
+				String mycategory = rs.getString("category");
+				
+				tempStory.setTitle(mytitle);
+				tempStory.setName(myname);
+				tempStory.setDescription(mydescription);
+				tempStory.setURL(myurl);
+				tempStory.setCategory(mycategory);
+				tempStory.setPrivate(myprivate);
+				
+				myStories.add(tempStory);
+			}
+			stmt.close();
+			conn.close();
+			return myStories;
+			
+			    } catch (java.lang.Exception ex) {
+			
+			        ex.printStackTrace();
+					return null;
+			    }
+			}
+	
+	public Story getStory() {
+		//use JDBC to insert this user into the database
+	  try {
+		  
+	    // connect to the database
+	    Connection conn = getConnection();
+	    Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM STORIES");
+		rs.next();
+		Story tempStory = new Story();
+				// retrieve and print the values for the current row
+				String myurl = rs.getString("url");
+				String mytitle = rs.getString("title");
+				String myname = rs.getString("name");
+				int myprivate = rs.getInt("private");
+				String mydescription = rs.getString("description");
+				String mystorytime = rs.getString("storytime");
+				int myvotes = rs.getInt("votes");
+				String mycategory = rs.getString("category");
+				
+				tempStory.setTitle(mytitle);
+				tempStory.setName(myname);
+				tempStory.setDescription(mydescription);
+				tempStory.setURL(myurl);
+				tempStory.setCategory(mycategory);
+				tempStory.setPrivate(myprivate);
+
+		System.out.println("query was executed successfully!");
+	    
+		// close statement, connection, and output stream
+		stmt.close();
+		conn.close();
+		return tempStory;
+	    } catch (java.lang.Exception ex) {
+	
+	        ex.printStackTrace();
+			return null;
+	    }
+	}
+
 	public boolean isValidAuthentication(String username, String password) {
 		//use JDBC to insert this user into the database
 	  try {
