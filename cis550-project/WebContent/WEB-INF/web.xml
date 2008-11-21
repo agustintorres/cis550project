@@ -63,4 +63,10 @@
       <servlet-name>AddFriendServlet</servlet-name>
       <url-pattern>/addfriend</url-pattern>
     </servlet-mapping>
+	
+	<!-- ViewStories mapping -->
+    <servlet-mapping>
+      <servlet-name>ViewStories</servlet-name>
+      <url-pattern>/viewstories</url-pattern>
+    </servlet-mapping>
 </web-app>
