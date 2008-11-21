@@ -31,8 +31,7 @@ public class DatabaseReader {
 	    PreparedStatement pstmt = conn.prepareStatement("SELECT password FROM USERS WHERE name = ?");
 	    pstmt.setString(1, username);
 	    	     
-		System.out.println(pstmt);
-	    System.out.println("already printed preparedStatement");
+		//System.out.println(pstmt);
 		
 	    ResultSet rs = pstmt.executeQuery();
 	    
@@ -45,16 +44,13 @@ public class DatabaseReader {
 		    if ( pass.equals(password) ) {
 				return true;
 			}
-	
-		    // print values
-		    System.out.println(pass + "\t");
 		}
 		
 		// close statement, connection, and output stream
 		pstmt.close();
 		conn.close();
 	    } catch (java.sql.SQLException ex) {
-	    	ex.printStackTrace();
+	    	//ex.printStackTrace();
 	    	return false;
 	    }
 	    
