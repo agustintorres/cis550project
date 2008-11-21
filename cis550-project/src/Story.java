@@ -19,6 +19,10 @@ public class Story {
 			this.name = name;
 		}
 		
+		public Story(){
+			
+		}
+		
 		public String getTitle() { return title; }
 		public String getName(){return name;}
 		public String getDescription() { return description; }

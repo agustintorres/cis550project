@@ -41,10 +41,10 @@ public class ViewStories extends HttpServlet {
 		out.println("<body>");
 		out.println("<b>Publishing complete</b><br><br>");
 		out.println("The paramter title was \"" + headline.getTitle() + "\".");
-		out.println("The paramter url was \"" + headline.getUrl() + "\".");
+		out.println("The paramter url was \"" + headline.getURL() + "\".");
 		out.println("The paramter description was \"" + headline.getDescription() + "\".");
 		out.println("The paramter category was \"" + headline.getCategory() + "\".");
-		out.println("The paramter private was \"" + headline.getIsprivate() + "\".");
+		out.println("The paramter private was \"" + headline.getPrivate() + "\".");
 		out.println("The paramter name was \"" + headline.getName() + "\".");
 		out.println("</body>");
 		out.println("</html>");

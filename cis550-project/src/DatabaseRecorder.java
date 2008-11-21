@@ -44,14 +44,14 @@ public class DatabaseRecorder {
 				tempStory.setTitle(mytitle);
 				tempStory.setName(myname);
 				tempStory.setDescription(mydescription);
-				tempStory.setUrl(myurl);
+				tempStory.setURL(myurl);
 				tempStory.setCategory(mycategory);
 				tempStory.setPrivate(myprivate);
 
 		System.out.println("query was executed successfully!");
 	    
 		// close statement, connection, and output stream
-		pstmt.close();
+		stmt.close();
 		conn.close();
 		return tempStory;
 	    } catch (java.lang.Exception ex) {
