@@ -29,7 +29,7 @@ public class DatabaseRecorder {
 	    Connection conn = getConnection();
 	    Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM STORIES");
-
+		rs.next();
 		Story tempStory = new Story();
 				// retrieve and print the values for the current row
 				String myurl = rs.getString("url");
