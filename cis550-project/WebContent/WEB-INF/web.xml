@@ -45,6 +45,18 @@
       <servlet-name>AddFriendServlet</servlet-name>
       <servlet-class>AddFriendServlet</servlet-class>
     </servlet>
+    
+    <!-- Declare the existence of AddFriendServlet -->
+    <servlet>
+      <servlet-name>TestSessionServlet</servlet-name>
+      <servlet-class>TestSessionServlet</servlet-class>
+    </servlet>
+    
+    <!-- Declare the existence of ViewStories -->
+    <servlet>
+      <servlet-name>ViewStories</servlet-name>
+      <servlet-class>ViewStories</servlet-class>
+    </servlet>
  
     <!-- RegisterServlet mapping -->
     <servlet-mapping>
@@ -63,8 +75,14 @@
       <servlet-name>AddFriendServlet</servlet-name>
       <url-pattern>/addfriend</url-pattern>
     </servlet-mapping>
-	
-	<!-- ViewStories mapping -->
+    
+    <!-- TestSessionServlet mapping -->
+    <servlet-mapping>
+      <servlet-name>TestSessionServlet</servlet-name>
+      <url-pattern>/testsession</url-pattern>
+    </servlet-mapping>
+    
+    <!-- ViewStories mapping -->
     <servlet-mapping>
       <servlet-name>ViewStories</servlet-name>
       <url-pattern>/viewstories</url-pattern>

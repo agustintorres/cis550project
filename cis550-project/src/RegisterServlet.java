@@ -46,6 +46,8 @@ public class RegisterServlet extends HttpServlet
         User user = new User(username, password, birthday, location, profession);
         DatabaseRecorder dr = new DatabaseRecorder();
         dr.recordUser(user);
-        System.out.println("hi2");
+        System.out.println("User recorded successfully!");
+        HttpSession session = req.getSession(true);
+        //session.putValue("myappl.connection", conn);
     }
 }
