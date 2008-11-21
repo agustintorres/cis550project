@@ -35,13 +35,21 @@ public class DatabaseReader {
 	    System.out.println("already printed preparedStatement");
 		
 	    ResultSet rs = pstmt.executeQuery();
-	    String pass = rs.getString(1);
-	    System.out.println("Pass is");
-		
-	    if ( pass.equals(password) ) {
-			return true;
-		}
 	    
+	    String pass = "";
+	    
+	    while (rs.next()) {
+		    // get current row values
+		    pass = rs.getString(1);
+		    
+		    if ( pass.equals(password) ) {
+				return true;
+			}
+	
+		    // print values
+		    System.out.println(pass + "\t");
+		}
+		
 		// close statement, connection, and output stream
 		pstmt.close();
 		conn.close();
