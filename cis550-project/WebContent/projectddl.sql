@@ -1,17 +1,17 @@
 create table USERS 
 ( 
    name VARCHAR(20) PRIMARY KEY,
-password VARCHAR(20) NOT NULL, 
-    dob DATE NULL, 
-    location VARCHAR(50) NULL, 
-    profession VARCHAR(50) NULL 
+   password VARCHAR(20) NOT NULL, 
+   dob DATE NULL, 
+   location VARCHAR(50) NULL, 
+   profession VARCHAR(50) NULL 
 ); 
   
 create table FRIENDS 
 ( 
 	pending INTEGER NOT NULL,
-    uid1 INTEGER references USERS(uid), 
-    uid2 INTEGER references USERS(uid), 
+    uid1 VARCHAR(20) references USERS(name), 
+    uid2 VARCHAR(20) references USERS(name), 
     primary key (uid1, uid2) 
      
 );

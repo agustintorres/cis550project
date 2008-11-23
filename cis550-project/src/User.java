@@ -18,13 +18,9 @@ public class User {
 	
 	
 	public String getUsername() { return username; }
-		
 	public String getPassword() { return password; }
-		
 	public String getBirthday() { return birthday; }
-	
 	public String getLocation() { return location; }
-	
 	public String getProfession() { return profession; }
 	
 }

@@ -6,9 +6,9 @@
 </head>
 <body>
 
-<p>Welcome!</p>
-<A HREF="index.html">Home</A> | <A HREF="register.html">Register</A> | <A HREF="about.html">About</A> | <A HREF="login.html">Login</A> | <A HREF="logout.html">Logout</A> |
-<A HREF="publish.html">Publish Stories</A> | <A HREF="friends.html">Friends</A>
+<!-- Menu Bar -->
+<A HREF="index.jsp">Home</A> | <A HREF="register.html">Register</A> | <A HREF="about.html">About</A> | <A HREF="login.html">Login</A> | <A HREF="logout">Logout</A> |
+<A HREF="publish.jsp">Publish Stories</A> | <A HREF="friends.html">Friends</A> | <A HREF="addfriend.html">Add Friends</A>
 <br><br>
 
 <p>Publish Story</p>

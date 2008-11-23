@@ -26,18 +26,23 @@ public class RegisterServlet extends HttpServlet
         PrintWriter out = resp.getWriter();
 
         out.println("<html>");
+        out.println("<head>");
         out.println("<title>");
         out.println("Registration Complete");
         out.println("</title>");
+        out.println("<meta http-equiv=\"REFRESH\" content=\"5; url=/cis550-project\">");
+        out.println("</head>");
+        
         out.println("<body>");
         out.println("<b>Registration complete</b><br><br>");
-        out.println("The paramter username was \"" + username + "\".");
-        out.println("The paramter email was \"" + email + "\".");
-        out.println("The paramter password was \"" + password + "\".");
-        out.println("The paramter name was \"" + name + "\".");
-        out.println("The paramter birthday was \"" + birthday + "\".");
-        out.println("The paramter location was \"" + location + "\".");
-        out.println("The paramter profession was \"" + profession + "\".");
+        out.println("You will now be shortly redirected to the home page.");
+        //out.println("The paramter username was \"" + username + "\".");
+        //out.println("The paramter email was \"" + email + "\".");
+        //out.println("The paramter password was \"" + password + "\".");
+        //out.println("The paramter name was \"" + name + "\".");
+        //out.println("The paramter birthday was \"" + birthday + "\".");
+        //out.println("The paramter location was \"" + location + "\".");
+        //out.println("The paramter profession was \"" + profession + "\".");
         out.println("</body>");
         out.println("</html>");
         out.flush();

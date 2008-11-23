@@ -134,9 +134,7 @@ public class DatabaseReader {
 	    } catch (java.sql.SQLException ex) {
 	    	//ex.printStackTrace();
 	    	return false;
-	    }
-	    
+	    }   
 	    return false;
 	}
-		
 }

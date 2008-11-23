@@ -6,10 +6,19 @@
 </head>
 <body>
 
-<p>Welcome!</p>
+<% 
+	//This is a scriptlet
+	if(session.isNew()) {
+		out.println("<p>Welcome!</p>");
+	} else {
+		out.println("<p> Welcome, " + session.getAttribute("username") + "! </p>");
+	}
+%>
+
+<p>The time is now <%= new java.util.Date() %></p>
 
 <!-- Menu Bar -->
-<A HREF="index.html">Home</A> | <A HREF="register.html">Register</A> | <A HREF="about.html">About</A> | <A HREF="login.html">Login</A> | <A HREF="logout.html">Logout</A> |
+<A HREF="index.jsp">Home</A> | <A HREF="register.html">Register</A> | <A HREF="about.html">About</A> | <A HREF="login.html">Login</A> | <A HREF="logout">Logout</A> |
 <A HREF="publish.jsp">Publish Stories</A> | <A HREF="friends.html">Friends</A> | <A HREF="addfriend.html">Add Friends</A>
 <br><br>
 

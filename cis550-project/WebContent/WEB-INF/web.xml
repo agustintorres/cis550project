@@ -57,6 +57,18 @@
       <servlet-name>ViewStories</servlet-name>
       <servlet-class>ViewStories</servlet-class>
     </servlet>
+    
+    <!-- Declare the existence of LoginServlet -->
+    <servlet>
+      <servlet-name>LoginServlet</servlet-name>
+      <servlet-class>LoginServlet</servlet-class>
+    </servlet>
+    
+    <!-- Declare the existence of LogoutServlet -->
+    <servlet>
+      <servlet-name>LogoutServlet</servlet-name>
+      <servlet-class>LogoutServlet</servlet-class>
+    </servlet>
  
     <!-- RegisterServlet mapping -->
     <servlet-mapping>
@@ -86,5 +98,17 @@
     <servlet-mapping>
       <servlet-name>ViewStories</servlet-name>
       <url-pattern>/viewstories</url-pattern>
+    </servlet-mapping>
+    
+    <!-- LoginServlet mapping -->
+    <servlet-mapping>
+      <servlet-name>LoginServlet</servlet-name>
+      <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    
+    <!-- LogoutServlet mapping -->
+    <servlet-mapping>
+      <servlet-name>LogoutServlet</servlet-name>
+      <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 </web-app>
