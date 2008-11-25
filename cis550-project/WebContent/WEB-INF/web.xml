@@ -69,6 +69,12 @@
       <servlet-name>LogoutServlet</servlet-name>
       <servlet-class>LogoutServlet</servlet-class>
     </servlet>
+    
+    <!-- Declare the existence of SearchServlet -->
+    <servlet>
+      <servlet-name>SearchServlet</servlet-name>
+      <servlet-class>SearchServlet</servlet-class>
+    </servlet>
  
     <!-- RegisterServlet mapping -->
     <servlet-mapping>
@@ -111,4 +117,11 @@
       <servlet-name>LogoutServlet</servlet-name>
       <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+    
+    <!-- SearchServlet mapping -->
+    <servlet-mapping>
+      <servlet-name>SearchServlet</servlet-name>
+      <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+    
 </web-app>

@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class DatabaseReader {
 	
@@ -137,4 +138,48 @@ public class DatabaseReader {
 	    }   
 	    return false;
 	}
+	
+	public LinkedList<LinkedList<Integer>> getStoriesWithTerm(LinkedList<String> words){
+		
+		try{
+			
+			LinkedList<Integer> results;
+			LinkedList<LinkedList<Integer>> listOfResults = new LinkedList<LinkedList<Integer>>();
+			
+			// connect to the database
+		    Connection conn = getConnection();
+		    
+		    // create and execute query
+		    
+		    PreparedStatement pstmt = conn.prepareStatement("SELECT docid FROM INVINDEX WHERE word = ?");
+		    
+		    for(int x = 0; x < words.size(); x++){
+		    	
+			    results = new LinkedList<Integer>();
+	
+			    pstmt.setString(1, words.get(x));
+			    	     			
+			    ResultSet rs = pstmt.executeQuery();
+			    
+			    int id;
+		    
+		    while (rs.next()) {
+			    // get current row values
+			    id = rs.getInt(1);
+			    
+			    results.add(id);
+			}
+		    
+		    listOfResults.add(results);
+		    
+		    }
+		
+		return listOfResults;
+		
+		} catch (java.lang.Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
 }

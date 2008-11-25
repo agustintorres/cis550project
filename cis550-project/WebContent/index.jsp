@@ -22,8 +22,8 @@
 <A HREF="publish.jsp">Publish Stories</A> | <A HREF="friends.html">Friends</A> | <A HREF="addfriend.html">Add Friends</A>
 <br><br>
 
-<form method="POST" action="servlet"/>
-Search: <input name="query" type="text" /> <br>
+<form method="POST" action="SearchServlet"/>
+Search: <input name="searchText" type="text" /> <br>
 <input type="submit" value="Submit" />
 </form>
 <br><br>
