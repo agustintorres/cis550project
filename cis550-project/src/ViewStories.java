@@ -21,14 +21,38 @@ public class ViewStories extends HttpServlet {
 		doPost(req, resp);
 	}
 
+	public static String getText(int i){
+		String out = "";
+		DatabaseReader dr = new DatabaseReader();
+		ArrayList<Story> newspaper;
+		
+		newspaper = dr.getStories(i);
+		
+		///////////////////////////////////////////
+		Iterator<Story> iter = newspaper.iterator();
+		Story headline;
+		while(iter.hasNext())
+		{
+			headline = iter.next();
+			out += ("Title: \"" + headline.getTitle() + "\". <br>");
+			out += ("URL: \"" + headline.getURL() + "\". <br>");
+			out += ("Description: \"" + headline.getDescription() + "\". <br>");
+			out += ("Category: \"" + headline.getCategory() + "\". <br>");
+			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
+			out += ("Submitted by: \"" + headline.getName() + "\". <br><br><br>");
+			
+		}
+		////////////////////////////////////////////
+		
+		return out;
+	}
+	
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException
 	{
 
-		DatabaseReader dr = new DatabaseReader();
-		ArrayList<Story> newspaper;
-		
-		newspaper = dr.getStories(3);
+
 		PrintWriter out = resp.getWriter();
 		
 		out.println("<html>");
@@ -38,22 +62,7 @@ public class ViewStories extends HttpServlet {
 		out.println("<body>");
 		out.println("<b>Publishing complete</b><br><br>");
 		
-		///////////////////////////////////////////
-		Iterator<Story> iter = newspaper.iterator();
-		Story headline;
-		while(iter.hasNext())
-		{
-			headline = iter.next();
-			out.println("Title: \"" + headline.getTitle() + "\". <br>");
-			out.println("URL: \"" + headline.getURL() + "\". <br>");
-			out.println("Description: \"" + headline.getDescription() + "\". <br>");
-			out.println("Category: \"" + headline.getCategory() + "\". <br>");
-			out.println("Private? \"" + headline.getPrivate() + "\". <br>");
-			out.println("Submitted by: \"" + headline.getName() + "\". <br><br><br>");
-			
-		}
-		////////////////////////////////////////////
-		
+		out.println(getText(10));
 
 		out.println("</body>");
 		out.println("</html>");
