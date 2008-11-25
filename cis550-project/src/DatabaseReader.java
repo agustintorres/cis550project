@@ -22,15 +22,44 @@ public class DatabaseReader {
 		}
 	}
 	
-	public ArrayList<Story> getStories(int i) {
+	public ArrayList<Story> getStories() {
+		return getStories(0, -1);
+	}
+	
+	public ArrayList<Story> getStories(int count) {
+		return getStories(count, -1);
+	}
+	
+	public Story getStoryById(int id){
+		ArrayList<Story> myStory = getStories(0, id);
+		Story outStory = myStory.get(0);
+		return outStory;
+	}
+	
+	public ArrayList<Story> getStories(int i, int id) {
+		//default is 10
+		
 		ArrayList<Story> myStories = new ArrayList<Story>();
+		
+		int count;
+		if (i > 0)
+			count = i;
+		else count = 10;
+		
+		
 		
 		try {
 			
 			Connection conn = getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM STORIES");
-			while(rs.next())
+			ResultSet rs;
+			if (id > 0){
+				rs = stmt.executeQuery("SELECT * FROM STORIES WHERE storyid = " + id);
+			}
+			else {
+				rs = stmt.executeQuery("SELECT * FROM STORIES");
+			}
+			while(rs.next() && (count > 0))
 			{
 				Story tempStory = new Story();
 				// retrieve and print the values for the current row
@@ -51,6 +80,7 @@ public class DatabaseReader {
 				tempStory.setPrivate(myprivate);
 				
 				myStories.add(tempStory);
+				count--;
 			}
 			stmt.close();
 			conn.close();
