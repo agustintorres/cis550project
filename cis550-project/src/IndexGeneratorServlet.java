@@ -28,12 +28,19 @@ public class IndexGeneratorServlet extends HttpServlet {
 		out.println("Publishing Complete");
 		out.println("</title>");
 		out.println("<body>");
-		out.println("<b>Publishing complete</b><br><br>");
+		
+		out.println("<form method=\"POST\" action=\"SearchServlet\"/>" +
+					"Search: <input name=\"searchText\" type=\"text\" /> <br>" +
+					"<input type=\"submit\" value=\"Submit\" />" +
+					"</form>" +
+					"<br><br>");
 		
 		out.println(PageGenerator.getMenuBar());
 		out.println("<br>");
 		out.println(ViewStories.getText(10));
 
+		
+		
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
