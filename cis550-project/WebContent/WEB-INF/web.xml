@@ -17,10 +17,22 @@
       <servlet-class>HelloServlet</servlet-class>
     </servlet>
     
+    <!-- Declare the existence of a servlet. -->
+    <servlet>
+      <servlet-name>HomeServlet</servlet-name>
+      <servlet-class>IndexGeneratorServlet</servlet-class>
+    </servlet>
+    
      <!-- Map URLs to that servlet. -->
     <servlet-mapping>
       <servlet-name>HelloServlet</servlet-name>
       <url-pattern>/servlet</url-pattern>
+    </servlet-mapping>
+    
+         <!-- Map URLs to that servlet. -->
+    <servlet-mapping>
+      <servlet-name>HomeServlet</servlet-name>
+      <url-pattern>/home</url-pattern>
     </servlet-mapping>
     
     <!-- Declare the existence of RegisterServlet -->
