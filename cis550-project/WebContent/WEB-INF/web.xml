@@ -41,6 +41,18 @@
       <servlet-class>RegisterServlet</servlet-class>
     </servlet>
     
+   <!-- Declare the existence of a servlet. -->
+    <servlet>
+      <servlet-name>XmlServlet</servlet-name>
+      <servlet-class>XmlGenerator</servlet-class>
+    </servlet>
+    
+     <!-- Map URLs to that servlet. -->
+    <servlet-mapping>
+      <servlet-name>XmlServlet</servlet-name>
+      <url-pattern>/feed</url-pattern>
+    </servlet-mapping>    
+    
     <!-- Declare the existence of Story ServletServlet -->
     <servlet>
     	<description>

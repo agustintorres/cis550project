@@ -21,6 +21,40 @@ public class ViewStories extends HttpServlet {
 		doPost(req, resp);
 	}
 
+	public static String getXml(int i) {
+		String out = "";
+		DatabaseReader dr = new DatabaseReader();
+		ArrayList<Story> newspaper;
+		
+		newspaper = dr.getStories(i);
+		
+		///////////////////////////////////////////
+		Iterator<Story> iter = newspaper.iterator();
+		Story headline;
+		while(iter.hasNext())
+		{
+			headline = iter.next();
+			out += ("<item> \n");
+			out += ("<title>" + headline.getTitle() + "</title> \n");
+			//out += ("Title: \"" + headline.getTitle() + "\". <br>");
+			
+			out += ("<link>" + headline.getURL() + "</link> \n");
+			//out += ("URL: \"" + headline.getURL() + "\". <br>");
+			
+			out += ("<description>" + headline.getDescription() + "</description> \n");
+			//out += ("Description: \"" + headline.getDescription() + "\". <br>");
+			//out += ("Category: \"" + headline.getCategory() + "\". <br>");
+			//out += ("Private? \"" + headline.getPrivate() + "\". <br>");
+			//out += ("Submitted by: \"" + headline.getName() + "\". <br><br><br>");
+			
+			out += ("</item>");
+			out += ("\n");
+		}
+		////////////////////////////////////////////
+		
+		return out;		
+	}
+	
 	public static String getText(int i){
 		String out = "";
 		DatabaseReader dr = new DatabaseReader();
