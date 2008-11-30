@@ -35,11 +35,19 @@ public class SearchInvertedIndex {
 			
 		}
 		
+		//remove duplicates
+		LinkedList<Integer> realrealResults = new LinkedList<Integer>();
+		for(int x = 0; x < realResults.size(); x++){
+			if (!realrealResults.contains(realResults.get(x))){
+				realrealResults.add(realResults.get(x));
+			}
+		}
+		
 		LinkedList<Story> newspaper = new LinkedList<Story>();
 		
 		
-		for(int x = 0; x < realResults.size(); x++){
-			newspaper.add(dr.getStoryById(realResults.get(x)));
+		for(int x = 0; x < realrealResults.size(); x++){
+			newspaper.add(dr.getStoryById(realrealResults.get(x)));
 		}
 		
 		return newspaper;
