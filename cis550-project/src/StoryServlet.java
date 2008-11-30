@@ -56,8 +56,11 @@ public class StoryServlet extends HttpServlet {
 		Story story = new Story(title, description, url, category, yes, name);
 		DatabaseRecorder dr = new DatabaseRecorder();
 		dr.recordStory(story);
-		//change hard code
-		InputInvertIndex iii = new InputInvertIndex(story, 1);
+
+		DatabaseReader dr2 = new DatabaseReader();
+		int id = dr2.getIdByStory(story);
+		
+		InputInvertIndex iii = new InputInvertIndex(story, id);
 		iii.recordStuff();
 	}
 

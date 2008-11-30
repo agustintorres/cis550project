@@ -203,13 +203,53 @@ public class DatabaseReader {
 		    listOfResults.add(results);
 		    
 		    }
+		    
+		    pstmt.close();
+			conn.close();
 		
 		return listOfResults;
+		
 		
 		} catch (java.lang.Exception ex) {
 			ex.printStackTrace();
 			return null;
 		}
 	}
+	
+	public int getIdByStory(Story s){
+		try{
+			int result = 0;
+			
+			Connection conn = getConnection();
+			
+			PreparedStatement pstmt = conn.prepareStatement("SELECT storyid FROM STORIES WHERE url = ? AND"
+													+" name = ? AND title = ? AND private = ? AND description = ?"
+													+" AND category = ?");
+			
+			pstmt.setString(1, s.getURL());
+			pstmt.setString(2, s.getName());
+			pstmt.setString(3, s.getTitle());
+			pstmt.setInt(4, s.getPrivate());
+			pstmt.setString(5, s.getDescription());
+			pstmt.setString(6, s.getCategory());
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {			
+				result = rs.getInt(1);
+			}
+			
+			pstmt.close();
+			conn.close();
+			
+			return result;	
+			
+			
+		} catch (java.lang.Exception ex) {
+			ex.printStackTrace();
+			return 0;
+		}
+	}
+
 	
 }

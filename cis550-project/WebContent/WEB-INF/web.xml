@@ -133,7 +133,7 @@
     <!-- SearchServlet mapping -->
     <servlet-mapping>
       <servlet-name>SearchServlet</servlet-name>
-      <url-pattern>/search</url-pattern>
+      <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
     
 </web-app>

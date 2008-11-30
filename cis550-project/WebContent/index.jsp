@@ -23,7 +23,7 @@
 <br><br>
 
 <form method="POST" action="SearchServlet"/>
-Search: <input name="searchText" type="text" /> <br>
+Search: <input name="searchtext" type="text" /> <br>
 <input type="submit" value="Submit" />
 </form>
 <br><br>
