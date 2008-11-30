@@ -23,21 +23,22 @@ public class DatabaseReader {
 	}
 	
 	public ArrayList<Story> getStories() {
-		return getStories(0, -1);
+		return getStories(0, -1, 0);
 	}
 	
 	public ArrayList<Story> getStories(int count) {
-		return getStories(count, -1);
+		return getStories(count, -1, 0);
 	}
 	
 	public Story getStoryById(int id){
-		ArrayList<Story> myStory = getStories(0, id);
+		ArrayList<Story> myStory = getStories(0, id, 0);
 		Story outStory = myStory.get(0);
 		return outStory;
 	}
 	
-	public ArrayList<Story> getStories(int i, int id) {
-		//default is 10
+	public ArrayList<Story> getStories(int i, int id, int order) {
+		//default is 10 stories
+		//default is ascending(=0) descending (=1)
 		
 		ArrayList<Story> myStories = new ArrayList<Story>();
 		
@@ -46,19 +47,33 @@ public class DatabaseReader {
 			count = i;
 		else count = 10;
 		
-		
+		int myOrder = 0;
+		if (order == 1)
+			myOrder = 1;
 		
 		try {
 			
 			Connection conn = getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs;
+			String myQuery = "";
 			if (id > 0){
-				rs = stmt.executeQuery("SELECT * FROM STORIES WHERE storyid = " + id);
+				myQuery = ("SELECT * FROM STORIES WHERE storyid = " + id);
 			}
 			else {
-				rs = stmt.executeQuery("SELECT * FROM STORIES");
+				myQuery = ("SELECT * FROM STORIES");
 			}
+			
+			if (myOrder == 1)
+			{
+				myQuery += " ORDER BY storytime DESC";
+			}
+			else {
+				myQuery += " ORDER BY storytime";
+			}
+			
+			rs = stmt.executeQuery(myQuery);
+			
 			while(rs.next() && (count > 0))
 			{
 				Story tempStory = new Story();
