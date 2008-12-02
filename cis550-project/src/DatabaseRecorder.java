@@ -21,6 +21,41 @@ public class DatabaseRecorder {
 		}
 	}
 	
+	public boolean recordComment(int storyid, String username, String text){
+		//cid
+		//+uid
+		//+storyid
+		//+text
+		//parent
+		//time
+		try {
+			  
+		    // connect to the database
+		    Connection conn = getConnection();
+		    
+		    // create and execute query
+		    PreparedStatement pstmt = conn.prepareStatement("INSERT INTO COMMENTS (uid, storyid, " + 
+		    		                                                            "text) " + 
+		    		                                                     "VALUES (?, ?, ?)");
+		    pstmt.setString(1, username);
+		    pstmt.setString(2, String.valueOf(storyid));
+		    pstmt.setString(3, text);
+
+		    	     
+			System.out.println(pstmt);
+		    pstmt.executeUpdate();
+			System.out.println("query was executed successfully!");
+		    
+			// close statement, connection, and output stream
+			pstmt.close();
+			conn.close();
+		    } catch (java.lang.Exception ex) {
+
+		        ex.printStackTrace();
+		        return false;
+		    }
+		    return true;
+	}
 
 	public void recordUser(User u) {
 		//use JDBC to insert this user into the database
