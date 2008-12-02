@@ -73,9 +73,9 @@ public class ViewStories extends HttpServlet {
 			out += ("Description: \"" + headline.getDescription() + "\". <br>");
 			out += ("Category: \"" + headline.getCategory() + "\". <br>");
 			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
-			out += ("Submitted by: \"" + headline.getName() + "\". <br><br><br>");
+			out += ("Submitted by: \"" + headline.getName() + "\". <br>");
 			//out += ("<a href=\"/vote?sid=x&uid=y\">Vote!</a>");
-			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=andrewcc\">Details...</a>");
+			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=andrewcc\">Details...</a> <br><br><br>");
 		}
 		////////////////////////////////////////////
 		
