@@ -22,12 +22,14 @@ public class StoryServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException
 	{
+		HttpSession session = req.getSession(true);
+		
 		String title = req.getParameter("title");
 		String url = req.getParameter("url");
 		String description = req.getParameter("description");
 		String category = req.getParameter("category");
 		String isprivate = req.getParameter("private");
-		String name =  req.getParameter("name");
+		String name =  (String) session.getAttribute("username");
 
 
 		PrintWriter out = resp.getWriter();

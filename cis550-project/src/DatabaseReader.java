@@ -289,6 +289,27 @@ public class DatabaseReader {
 			return 0;
 		}
 	}
+	
+	public LinkedList<Friend> getFriendsByName(String name){
+		try{
+			LinkedList<Friend> results = new LinkedList<Friend>();
+			
+			Connection conn = getConnection();
+			
+			PreparedStatement pstmt = conn.prepareStatement("SELECT storyid FROM STORIES WHERE url = ? AND"
+											+" name = ? AND title = ? AND private = ? AND description = ?"
+																	+" AND category = ?");
+			
+			
+			return results;
+			
+		} catch (java.lang.Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
+		
+	}
 
 	
 }

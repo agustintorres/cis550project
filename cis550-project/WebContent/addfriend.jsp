@@ -8,12 +8,12 @@
 
 <!-- Menu Bar -->
 <A HREF="index.jsp">Home</A> | <A HREF="register.html">Register</A> | <A HREF="about.html">About</A> | <A HREF="login.html">Login</A> | <A HREF="logout">Logout</A> |
-<A HREF="publish.jsp">Publish Stories</A> | <A HREF="friends.html">Friends</A> | <A HREF="addfriend.html">Add Friends</A>
+<A HREF="publish.jsp">Publish Stories</A> | <A HREF="friends.html">Friends</A> | <A HREF="addfriend.jsp">Add Friends</A>
 <br><br>
 
 <p>Add a Friend</p>
 <form method="POST" action="addfriend"/>
-Your username: <input name="uid1" type="text" /> <br>
+Your username: <%=session.getAttribute("username")%> <br>
 Username of your friend: <input name="uid2" type="text" /> <br>
 <input type="submit" value="Submit" /> <br>
 </form>

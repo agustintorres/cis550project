@@ -27,14 +27,14 @@ public class ViewFriendServlet {
 		out.println("</title>");
 		out.println("<body>");
 		out.println("<b>Pending Friends</b><br><br>");
-		out.println("You added " + uid2 + " as a friend.");
+		//out.println("You added " + uid2 + " as a friend.");
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
 
-		Friend f = new Friend(uid1, uid2);
+		//Friend f = new Friend(uid1, uid2);
 		DatabaseRecorder dr = new DatabaseRecorder();
-		dr.recordFriend(f);
+		//dr.recordFriend(f);
 	}
 
 }

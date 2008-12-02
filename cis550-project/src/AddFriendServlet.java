@@ -14,7 +14,9 @@ public class AddFriendServlet extends HttpServlet
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException
     {
-    	String uid1 = req.getParameter("uid1");
+    	
+    	HttpSession session = req.getSession(true);
+    	String uid1 = (String) session.getAttribute("username");
     	String uid2 = req.getParameter("uid2");
     	
         PrintWriter out = resp.getWriter();
