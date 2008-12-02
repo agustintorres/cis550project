@@ -31,10 +31,13 @@ public class IndexGeneratorServlet extends HttpServlet {
 		out.println("<body>");
 		
 		HttpSession session = req.getSession();
+		String username = "notloggedin";
 		if(session.isNew() || session.getAttribute("username") == null) {
 			out.println("<p>Welcome!</p>");
 		} else {
 			out.println("<p> Welcome, " + session.getAttribute("username") + "! </p>");
+			username = (String) session.getAttribute("username");
+			
 		}
 		
         out.println("<br>");
@@ -47,7 +50,7 @@ public class IndexGeneratorServlet extends HttpServlet {
 				"</form>" +
 				"<br><br>");
 		
-		out.println(ViewStories.getText(10));
+		out.println(ViewStories.getText(10, username));
 
 		
 		

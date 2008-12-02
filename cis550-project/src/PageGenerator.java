@@ -8,7 +8,7 @@ public class PageGenerator {
 		String output ="";
 		output += "<!-- Menu Bar -->";
 
-		output += "<A HREF=\"/cis550-project/home\">Home</A> | <A HREF=\"register.html\">Register</A> | <A HREF=\"about.html\">About</A> | <A HREF=\"login.html\">Login</A> | <A HREF=\"logout.html\">Logout</A> |";
+		output += "<A HREF=\"/cis550-project/home\">Home</A> | <A HREF=\"register.html\">Register</A> | <A HREF=\"about.html\">About</A> | <A HREF=\"login.html\">Login</A> | <A HREF=\"/cis550-project/logout\">Logout</A> |";
 
 		output += "<A HREF=\"publish.jsp\">Publish Stories</A> | <A HREF=\"friends.html\">Friends</A> | <A HREF=\"addfriend.html\">Add Friends</A> | <A HREF=\"feed\">RSS feeds</A>";
 		output += "<br><br>";
