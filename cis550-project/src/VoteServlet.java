@@ -27,7 +27,7 @@ public class VoteServlet extends HttpServlet {
 		
 		//Get params for storyid and userid
 		
-		int theUser = Integer.parseInt(req.getParameter("uid"));
+		String theUser = req.getParameter("uid");
 		int theStory = Integer.parseInt(req.getParameter("sid"));
 		
 		//Query the votes table to see if tuple exists for storyid and userid

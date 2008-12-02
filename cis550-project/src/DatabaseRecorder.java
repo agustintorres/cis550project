@@ -52,7 +52,7 @@ public class DatabaseRecorder {
 	    }
 	}
 
-	public void vote(int uid, int sid) {
+	public void vote(String uid, int sid) {
 		//use JDBC to insert this user into the database
 	  try {
 		  
@@ -62,7 +62,7 @@ public class DatabaseRecorder {
 	    // create and execute query
 	    PreparedStatement pstmt = conn.prepareStatement("INSERT INTO VOTES (uid, storyid) " + 
 	    		                                                     "VALUES (?, ?)");
-	    pstmt.setString(1, Integer.toString(uid));
+	    pstmt.setString(1, uid);
 	    pstmt.setString(2, Integer.toString(sid));
 
 		System.out.println(pstmt);

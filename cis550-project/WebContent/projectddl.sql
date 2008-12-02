@@ -50,13 +50,19 @@ CREATE TABLE POSTS
 
 );
   
-CREATE TABLE COMMENTS 
-( 
-    cid INTEGER AUTO_INCREMENT PRIMARY KEY, 
-    text VARCHAR(2000) NOT NULL, 
-	parent INTEGER NOT NULL,
-    commenttime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (parent) REFERENCES COMMENTS(cid) 
+CREATE TABLE COMMENTS
+
+(     
+	cid INTEGER AUTO_INCREMENT PRIMARY KEY,
+	uid VARCHAR(20) NOT NULL,
+   	storyid INTEGER NOT NULL,    
+	text VARCHAR(2000) NOT NULL,
+    parent INTEGER NOT NULL,    
+	commenttime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    
+	FOREIGN KEY (parent) REFERENCES COMMENTS(cid) ,
+	FOREIGN KEY (uid) REFERENCES USERS(name),
+    FOREIGN KEY(storyid) REFERENCES STORIES(storyid)
+
 );
 
 create table PARENTOF 
@@ -70,10 +76,10 @@ create table PARENTOF
 create table VOTES
 (
     uid VARCHAR(20) NOT NULL, 
-	url VARCHAR(255) NOT NULL, 
+	storyid INTEGER NOT NULL,
 	foreign key (uid) references USERS(name), 
-	foreign key (url) references STORIES(url), 
-	primary key(uid, url)
+	foreign key (storyid) references STORIES(storyid), 
+	primary key(uid, storyid)
 );
 
 create table INVINDEX
@@ -119,10 +125,10 @@ insert into CATEGORIES values ('Technology');
 /* Stories */
 insert into STORIES values ('http://www.complex.com/blogs/2008/12/01/the-5-most-infamous-self-inflicted-athelete-injuries/',
                             1, 'agustin', 'The 5 Most Infamous Self-Inflicted Athelete Injuries', 
-                            0, 'By now, youve probably heard all about New York Giants wide receiver Plaxico Burress’s wild Thanksgiving weekend. But is it the worst off-field, self-inflicted (and non-lethal, word to our already iffy sports injury karma) injury in sports history? Read on to see our top 5...',
+                            0, 'By now, youve probably heard all about New York Giants wide receiver Plaxico Burress wild Thanksgiving weekend. But is it the worst off-field, self-inflicted (and non-lethal, word to our already iffy sports injury karma) injury in sports history? Read on to see our top 5...',
                             '2008-12-1', 132, 'Sports');
 insert into STORIES values ('http://www.treehugger.com/files/2008/12/worlds-fastest-electric-superbike-125mph.php',
-                            2, 'mattwonder', 'World’s Fastest Electric Superbike: 125 MPH & No Carbon Emis', 
+                            2, 'mattwonder', 'Worlds Fastest Electric Superbike: 125 MPH and No Carbon Emis', 
                             1, 'If you live in the United States, you may have missed the announcement made last Thursday, that the world ’s fastest all-electric superbike has been unveiled. Making its first appearance at the 2008 NEC Bike Show in the UK , the TTX01 isn’t commercially available yet.',
                             '2008-11-29', 5, 'Sports');
 insert into STORIES values ('http://arstechnica.com/journals/apple.ars/2008/12/01/apple-offers-free-licensing-for-mini-displayport-spec',
@@ -157,11 +163,11 @@ insert into VOTES values ('esr', 2);
 
 
 /* Comments */
-insert into COMMENTS values (1, 'This story sucks.', 1, '2008-12-1 1:15');
-insert into COMMENTS values (2, 'I agree. This story sucks.', 1, '2008-12-1 2:00');
-insert into COMMENTS values (3, 'I disagree. The story rocks!', 2, '2008-12-1 3:40');
-insert into COMMENTS values (4, 'Cool stuff.', 1, '2008-12-1 17:50');
-insert into COMMENTS values (5, 'Everyones should read this!.', 1, '2008-12-1');
+insert into COMMENTS values (1, 'agustin', 1, 'This story sucks.', 1, '2008-12-1 1:15');
+insert into COMMENTS values (2, 'andrewcc', 1, 'I agree. This story sucks.', 1, '2008-12-1 2:00');
+insert into COMMENTS values (3, 'mattwonder', 1, 'I disagree. The story rocks!', 2, '2008-12-1 3:40');
+insert into COMMENTS values (4, 'ana', 1, 'Cool stuff.', 1, '2008-12-1 17:50');
+insert into COMMENTS values (5, 'esr', 1, 'Everyones should read this!.', 1, '2008-12-1');
 
 
 

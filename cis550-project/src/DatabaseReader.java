@@ -22,7 +22,7 @@ public class DatabaseReader {
 		}
 	}
 	
-	public boolean voteExists(int userid, int storyid) {
+	public boolean voteExists(String userid, int storyid) {
 		boolean output = false;
 		
 		try {
@@ -58,6 +58,40 @@ public class DatabaseReader {
 		ArrayList<Story> myStory = getStories(0, id, 0);
 		Story outStory = myStory.get(0);
 		return outStory;
+	}
+	
+	public ArrayList<Comment> getComments(int storyId){
+		ArrayList<Comment> chat = new ArrayList<Comment>();
+		try {
+			
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs;
+			String myQuery = "";
+			
+			myQuery = ("SELECT * FROM COMMENTS WHERE storyid = " + storyId);
+
+			
+			rs = stmt.executeQuery(myQuery);
+			
+			while(rs.next())
+			{
+				Comment tempComment = new Comment();
+				// retrieve and print the values for the current row
+				String myText = rs.getString("text");
+				
+				tempComment.setText(myText);
+				chat.add(tempComment);
+			}
+			stmt.close();
+			conn.close();
+			
+			    } catch (java.lang.Exception ex) {
+			
+			        ex.printStackTrace();
+					return null;
+			    }
+		return chat;
 	}
 	
 	public ArrayList<Story> getStories(int i, int id, int order) {
@@ -117,6 +151,8 @@ public class DatabaseReader {
 				tempStory.setURL(myurl);
 				tempStory.setCategory(mycategory);
 				tempStory.setPrivate(myprivate);
+				tempStory.setVotes(myvotes);
+				tempStory.setStorytime(mystorytime);
 				
 				myStories.add(tempStory);
 				count--;

@@ -9,6 +9,8 @@ public class Story {
 		private String name;
 		private int isPrivate;
 		private int storyid;
+		private int votes;
+		private String storytime;
 		
 		public Story(String title, String description, 
 	                String url, String category, int isPrivate, String name) {
@@ -31,6 +33,8 @@ public class Story {
 		public String getCategory() { return category; }
 		public int getPrivate() { return isPrivate; }
 		public int getStoryid() {return storyid;}
+		public int getVotes() { return votes;}
+		public String getStorytime() {return storytime;}
 		
 		public void setTitle(String t) {  title = t; }
 		public void setName(String n){ name = n;}
@@ -38,5 +42,7 @@ public class Story {
 		public void setURL(String u) {  url = u; }
 		public void setCategory(String c) {  category = c; }
 		public void setPrivate(int p) {  isPrivate = p; }
-		public void setStoryid(int id) {storyid = id;}	
+		public void setStoryid(int id) {storyid = id;}
+		public void setVotes(int v) {votes = v;}
+		public void setStorytime (String t) {storytime = t;}
 }

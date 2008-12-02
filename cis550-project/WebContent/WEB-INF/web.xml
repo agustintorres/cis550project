@@ -40,6 +40,18 @@
       <servlet-name>VoteServlet</servlet-name>
       <url-pattern>/vote</url-pattern>
     </servlet-mapping>
+
+    <!-- Declare the existence of a servlet. -->
+    <servlet>
+      <servlet-name>DetailServlet</servlet-name>
+      <servlet-class>DetailServlet</servlet-class>
+    </servlet>
+    
+     <!-- Map URLs to that servlet. -->
+    <servlet-mapping>
+      <servlet-name>DetailServlet</servlet-name>
+      <url-pattern>/detail</url-pattern>
+    </servlet-mapping>    
     
     <!-- Declare the existence of a servlet. -->
     <servlet>
