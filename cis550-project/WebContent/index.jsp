@@ -3,12 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome!</title>
+<meta http-equiv="REFRESH" content="0;url=/cis550-project/home">
 </head>
 <body>
 
 <% 
 	//This is a scriptlet
-	if(session.isNew()) {
+	if(session.isNew() || session.getAttribute("username") == null) {
 		out.println("<p>Welcome!</p>");
 	} else {
 		out.println("<p> Welcome, " + session.getAttribute("username") + "! </p>");

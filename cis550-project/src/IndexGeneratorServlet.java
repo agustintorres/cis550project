@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class IndexGeneratorServlet extends HttpServlet {
@@ -29,14 +30,23 @@ public class IndexGeneratorServlet extends HttpServlet {
 		out.println("</title>");
 		out.println("<body>");
 		
-		out.println("<form method=\"POST\" action=\"SearchServlet\"/>" +
-					"Search: <input name=\"searchText\" type=\"text\" /> <br>" +
-					"<input type=\"submit\" value=\"Submit\" />" +
-					"</form>" +
-					"<br><br>");
+		HttpSession session = req.getSession();
+		if(session.isNew() || session.getAttribute("username") == null) {
+			out.println("<p>Welcome!</p>");
+		} else {
+			out.println("<p> Welcome, " + session.getAttribute("username") + "! </p>");
+		}
 		
+        out.println("<br>");
 		out.println(PageGenerator.getMenuBar());
 		out.println("<br>");
+		
+		out.println("<form method=\"POST\" action=\"SearchServlet\"/>" +
+				"Search: <input name=\"searchText\" type=\"text\" /> <br>" +
+				"<input type=\"submit\" value=\"Submit\" />" +
+				"</form>" +
+				"<br><br>");
+		
 		out.println(ViewStories.getText(10));
 
 		
