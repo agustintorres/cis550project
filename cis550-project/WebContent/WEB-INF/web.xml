@@ -29,6 +29,18 @@
       <url-pattern>/servlet</url-pattern>
     </servlet-mapping>
     
+    <!-- Declare the existence of a servlet. -->
+    <servlet>
+      <servlet-name>VoteServlet</servlet-name>
+      <servlet-class>VoteServlet</servlet-class>
+    </servlet>
+    
+     <!-- Map URLs to that servlet. -->
+    <servlet-mapping>
+      <servlet-name>VoteServlet</servlet-name>
+      <url-pattern>/vote</url-pattern>
+    </servlet-mapping>
+    
          <!-- Map URLs to that servlet. -->
     <servlet-mapping>
       <servlet-name>HomeServlet</servlet-name>

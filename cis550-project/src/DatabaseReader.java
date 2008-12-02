@@ -22,6 +22,30 @@ public class DatabaseReader {
 		}
 	}
 	
+	public boolean voteExists(int userid, int storyid) {
+		boolean output = false;
+		
+		try {
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs;
+			String myQuery = ("SELECT * FROM VOTES WHERE storyid = " + storyid + " AND uid = " + userid);
+			rs = stmt.executeQuery(myQuery);
+			
+			while(rs.next()){
+				return true;
+			}
+		}
+		
+		catch(java.lang.Exception ex) {
+			
+	        ex.printStackTrace();
+			return false;
+	    }
+		
+		return output;
+	}
+	
 	public ArrayList<Story> getStories() {
 		return getStories(0, -1, 0);
 	}

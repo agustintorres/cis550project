@@ -52,6 +52,32 @@ public class DatabaseRecorder {
 	    }
 	}
 
+	public void vote(int uid, int sid) {
+		//use JDBC to insert this user into the database
+	  try {
+		  
+	    // connect to the database
+	    Connection conn = getConnection();
+	    
+	    // create and execute query
+	    PreparedStatement pstmt = conn.prepareStatement("INSERT INTO VOTES (uid, storyid) " + 
+	    		                                                     "VALUES (?, ?)");
+	    pstmt.setString(1, Integer.toString(uid));
+	    pstmt.setString(2, Integer.toString(sid));
+
+		System.out.println(pstmt);
+	    pstmt.executeUpdate();
+		System.out.println("query was executed successfully!");
+	    
+		// close statement, connection, and output stream
+		pstmt.close();
+		conn.close();
+	    } catch (java.lang.Exception ex) {
+
+	        ex.printStackTrace();
+	    }
+	}
+	
 	public void recordStory(Story s) {
 		
 		try {
