@@ -40,14 +40,11 @@ public class VoteServlet extends HttpServlet {
 		else
 		{
 			status = "SUCCESS";
+			//If not, update the table to record this user and vote
+			DatabaseRecorder drec = new DatabaseRecorder();
+			
+			drec.vote(theUser, theStory);
 		}
-		
-		//If not, update the table to record this user and vote
-		DatabaseRecorder drec = new DatabaseRecorder();
-		
-		drec.vote(theUser, theStory);
-		
-		
 		//Return success or failure...
 		PrintWriter out = resp.getWriter();
 		out.println("<html>");

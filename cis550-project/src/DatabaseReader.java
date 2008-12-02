@@ -79,8 +79,12 @@ public class DatabaseReader {
 				Comment tempComment = new Comment();
 				// retrieve and print the values for the current row
 				String myText = rs.getString("text");
+				String myAuthor = rs.getString("uid");
+				String myTime = rs.getString("commenttime");
 				
 				tempComment.setText(myText);
+				tempComment.setAuthor(myAuthor);
+				tempComment.setCommenttime(myTime);
 				chat.add(tempComment);
 			}
 			stmt.close();
