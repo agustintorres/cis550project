@@ -56,6 +56,10 @@ public class ViewStories extends HttpServlet {
 	}
 	
 	public static String getText(int i){
+		return getText(i, "notloggedin");
+	}
+	
+	public static String getText(int i, String username){
 		String out = "";
 		DatabaseReader dr = new DatabaseReader();
 		ArrayList<Story> newspaper;
@@ -75,7 +79,7 @@ public class ViewStories extends HttpServlet {
 			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
 			out += ("Submitted by: \"" + headline.getName() + "\". <br>");
 			//out += ("<a href=\"/vote?sid=x&uid=y\">Vote!</a>");
-			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=andrewcc\">Details...</a> <br><br><br>");
+			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
 		}
 		////////////////////////////////////////////
 		

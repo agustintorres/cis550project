@@ -148,6 +148,8 @@ public class DatabaseReader {
 				String mystorytime = rs.getString("storytime");
 				int myvotes = rs.getInt("votes");
 				String mycategory = rs.getString("category");
+				int mystoryid = rs.getInt("storyid");
+				
 				
 				tempStory.setTitle(mytitle);
 				tempStory.setName(myname);
@@ -157,7 +159,7 @@ public class DatabaseReader {
 				tempStory.setPrivate(myprivate);
 				tempStory.setVotes(myvotes);
 				tempStory.setStorytime(mystorytime);
-				
+				tempStory.setStoryid(mystoryid);
 				myStories.add(tempStory);
 				count--;
 			}
