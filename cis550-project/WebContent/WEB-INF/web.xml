@@ -41,6 +41,18 @@
       <url-pattern>/vote</url-pattern>
     </servlet-mapping>
     
+    <!-- Declare the existence of a servlet. -->
+    <servlet>
+      <servlet-name>ViewFriendServlet</servlet-name>
+      <servlet-class>ViewFriendServlet</servlet-class>
+    </servlet>
+    
+     <!-- Map URLs to that servlet. -->
+    <servlet-mapping>
+      <servlet-name>ViewFriendServlet</servlet-name>
+      <url-pattern>/viewfriend</url-pattern>
+    </servlet-mapping>    
+    
          <!-- Map URLs to that servlet. -->
     <servlet-mapping>
       <servlet-name>HomeServlet</servlet-name>
