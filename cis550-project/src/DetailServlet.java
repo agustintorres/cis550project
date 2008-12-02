@@ -55,9 +55,9 @@ public class DetailServlet extends HttpServlet {
 		
 		//give vote option
 		
-		out.println("<a href=\"/vote?sid=" + theStory + "&uid="+ theUser +"\">Vote!</a>");
+		out.println("<a href=\"/cis550-project/vote?sid=" + theStory + "&uid="+ theUser +"\">Vote!</a>");
 		
-		out.println("<a href=\"/comment?sid=" + theStory + "&uid="+ theUser + "&commenttext=blahblahcomment" + "\">Comment!</a>");
+		out.println("<a href=\"/cis550-project/comment?sid=" + theStory + "&uid="+ theUser + "&commenttext=blahblahcomment" + "\">Comment!</a>");
 		
 		//list all other comments
 		

@@ -29,7 +29,7 @@ public class DatabaseReader {
 			Connection conn = getConnection();
 			Statement stmt = conn.createStatement();
 			ResultSet rs;
-			String myQuery = ("SELECT * FROM VOTES WHERE storyid = " + storyid + " AND uid = " + userid);
+			String myQuery = ("SELECT * FROM VOTES WHERE storyid = " + storyid + " AND uid=\"" + userid + "\"");
 			rs = stmt.executeQuery(myQuery);
 			
 			while(rs.next()){
