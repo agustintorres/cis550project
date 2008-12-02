@@ -57,6 +57,8 @@ public class DetailServlet extends HttpServlet {
 		
 		out.println("<a href=\"/vote?sid=" + theStory + "&uid="+ theUser +"\">Vote!</a>");
 		
+		out.println("<a href=\"/comment?sid=" + theStory + "&uid="+ theUser + "&commenttext=blahblahcomment" + "\">Comment!</a>");
+		
 		//list all other comments
 		
 		ArrayList<Comment> chatlog = drdr.getComments(theStory);
