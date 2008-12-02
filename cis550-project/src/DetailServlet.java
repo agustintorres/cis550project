@@ -45,9 +45,8 @@ public class DetailServlet extends HttpServlet {
 		//list story details
 		DatabaseReader drdr = new DatabaseReader();
 		Story headline = drdr.getStoryById(theStory);
-		 
-		out.println("Title: \"" + headline.getTitle() + "\". <br>");
-		out.println("URL: \"" + headline.getURL() + "\". <br>");
+		
+		out.println("<a href=\"" + headline.getURL() + "\">" + headline.getTitle() + "</a> . <br>");
 		out.println("Description: \"" + headline.getDescription() + "\". <br>");
 		out.println("Category: \"" + headline.getCategory() + "\". <br>");
 		out.println("Private? \"" + headline.getPrivate() + "\". <br>");
@@ -56,11 +55,11 @@ public class DetailServlet extends HttpServlet {
 		out.println("Votes: \"" + headline.getVotes() + "\". <br><br><br>");
 		
 		//give vote option
-		
+		if(!(theUser.equals("notloggedin"))){		
 		out.println("<a href=\"/cis550-project/vote?sid=" + theStory + "&uid="+ theUser +"\">Vote!</a>");
 		
 		out.println("<a href=\"/cis550-project/comment?sid=" + theStory + "&uid="+ theUser + "&commenttext=blahblahcomment" + "\">Comment!</a>");
-		
+		}
 		//list all other comments
 		
 		ArrayList<Comment> chatlog = drdr.getComments(theStory);

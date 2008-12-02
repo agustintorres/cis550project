@@ -72,8 +72,8 @@ public class ViewStories extends HttpServlet {
 		while(iter.hasNext())
 		{
 			headline = iter.next();
-			out += ("Title: \"" + headline.getTitle() + "\". <br>");
-			out += ("URL: \"" + headline.getURL() + "\". <br>");
+			//out += ("Title: \"" + headline.getTitle() + "\". <br>");
+			out += ("<a href=\"" + headline.getURL() + "\">" + headline.getTitle() + "</a> . <br>");
 			out += ("Description: \"" + headline.getDescription() + "\". <br>");
 			out += ("Category: \"" + headline.getCategory() + "\". <br>");
 			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
