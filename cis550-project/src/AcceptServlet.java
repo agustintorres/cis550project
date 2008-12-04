@@ -38,7 +38,7 @@ public class AcceptServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession(true);
 		String uid1 = (String) session.getAttribute("username");
-		String friend = req.getParameter("him");
+		String friend = req.getParameter("user");
 		
 		PrintWriter out = resp.getWriter();
 		

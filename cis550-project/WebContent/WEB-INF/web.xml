@@ -200,12 +200,8 @@
       <servlet-name>SearchServlet</servlet-name>
       <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-    	<servlet-name>AcceptServlet</servlet-name>
-    	<url-pattern>/AcceptServlet</url-pattern>
-    </servlet-mapping>
     
-    <!-- SearchServlet mapping -->
+    <!-- AcceptServlet mapping -->
     <servlet-mapping>
       <servlet-name>AcceptServlet</servlet-name>
       <url-pattern>/accept</url-pattern>

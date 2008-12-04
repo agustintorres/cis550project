@@ -35,9 +35,9 @@ public class ViewFriendServlet extends HttpServlet{
 		out.println("</title>");
 		out.println("<body>");
 		out.println("<b>Your Friends</b><br><br>");
-		out.println(getText(uid1, true));
-		out.println("<b>Pending Friends</b><br><br>");
 		out.println(getText(uid1, false));
+		out.println("<b>Pending Friends</b><br><br>");
+		out.println(getText(uid1, true));
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
@@ -51,7 +51,7 @@ public class ViewFriendServlet extends HttpServlet{
 		DatabaseReader dr = new DatabaseReader();
 		LinkedList<User> users = dr.getFriendsByName(uid1, pending);
 		
-		if(pending = false){
+		if(pending == false){
 		for(int x = 0; x < users.size(); x++){
 			out += "Name: "+ users.get(x).getUsername()+ " <br>";
 			out += "Age: "+ users.get(x).getBirthday()+ " <br>";
@@ -59,17 +59,19 @@ public class ViewFriendServlet extends HttpServlet{
 			out += "Profession: "+users.get(x).getProfession()+ " <br><br>";
 		}		
 		}else{
+		out += "<select name = \"user\">";
+		
+		
 			for(int x = 0; x < users.size(); x++){
-				out += "Name: "+ users.get(x).getUsername()+ " <br>";
-				out += "Age: "+ users.get(x).getBirthday()+ " <br>";
-				out += "Location: "+users.get(x).getLocation()+ " <br>";
-				out += "Profession: "+users.get(x).getProfession()+ " <br>";
-				out += "<form method=\"POST\" action=\"AcceptServlet\"/> "+
-						"<INPUT TYPE=hidden NAME=him VALUE=/"+ users.get(x).getUsername() +"\"/>" +
-						"<input type=\"submit\" value=\"Accept\" /> "+
-						"</form>";
-				
-			}				
+				out += "<option value =\""+ users.get(x).getUsername()+"\">"+users.get(x).getUsername()+"</option>";
+			
+			}
+			
+		out += "</select> <br>";
+		out += "<form method=\"POST\" action=\"AcceptServlet\"/> "+
+		"<input type=\"submit\" value=\"Accept\" /> "+
+		"</form>";
+			
 		}
 		
 		return out;
