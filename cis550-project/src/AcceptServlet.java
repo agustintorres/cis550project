@@ -1,10 +1,13 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class AcceptServlet
@@ -33,6 +36,14 @@ public class AcceptServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = req.getSession(true);
+		String uid1 = (String) session.getAttribute("username");
+		String friend = req.getParameter("him");
+		
+		PrintWriter out = resp.getWriter();
+		
+		out.flush();
+		
 	}
 
 }

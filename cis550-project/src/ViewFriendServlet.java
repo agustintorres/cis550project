@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.*;
 
 
-@SuppressWarnings("serial")
-public class ViewFriendServlet extends HttpServlet {
+public class ViewFriendServlet extends HttpServlet{
+
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException
@@ -31,18 +32,47 @@ public class ViewFriendServlet extends HttpServlet {
 
 		out.println("<html>");
 		out.println("<title>");
-		out.println("Friend Added");
 		out.println("</title>");
 		out.println("<body>");
+		out.println("<b>Your Friends</b><br><br>");
+		out.println(getText(uid1, true));
 		out.println("<b>Pending Friends</b><br><br>");
-		//out.println("You added " + uid2 + " as a friend.");
+		out.println(getText(uid1, false));
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
 
-		//Friend f = new Friend(uid1, uid2);
-		DatabaseRecorder dr = new DatabaseRecorder();
-		//dr.recordFriend(f);
+
+	}
+	
+	public static String getText(String uid1, boolean pending){
+		
+		String out = "";
+		DatabaseReader dr = new DatabaseReader();
+		LinkedList<User> users = dr.getFriendsByName(uid1, pending);
+		
+		if(pending = false){
+		for(int x = 0; x < users.size(); x++){
+			out += "Name: "+ users.get(x).getUsername()+ " <br>";
+			out += "Age: "+ users.get(x).getBirthday()+ " <br>";
+			out += "Location: "+users.get(x).getLocation()+ " <br>";
+			out += "Profession: "+users.get(x).getProfession()+ " <br><br>";
+		}		
+		}else{
+			for(int x = 0; x < users.size(); x++){
+				out += "Name: "+ users.get(x).getUsername()+ " <br>";
+				out += "Age: "+ users.get(x).getBirthday()+ " <br>";
+				out += "Location: "+users.get(x).getLocation()+ " <br>";
+				out += "Profession: "+users.get(x).getProfession()+ " <br>";
+				out += "<form method=\"POST\" action=\"AcceptServlet\"/> "+
+						"<INPUT TYPE=hidden NAME=him VALUE=/"+ users.get(x).getUsername() +"\"/>" +
+						"<input type=\"submit\" value=\"Accept\" /> "+
+						"</form>";
+				
+			}				
+		}
+		
+		return out;
 	}
 
 }

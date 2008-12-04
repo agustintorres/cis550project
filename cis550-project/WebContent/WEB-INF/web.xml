@@ -145,12 +145,13 @@
       <servlet-name>SearchServlet</servlet-name>
       <servlet-class>SearchServlet</servlet-class>
     </servlet>
-    
+
     <!-- Declare the existence of AcceptServlet -->
     <servlet>
       <servlet-name>AcceptServlet</servlet-name>
       <servlet-class>AcceptServlet</servlet-class>
     </servlet>
+
  
     <!-- RegisterServlet mapping -->
     <servlet-mapping>
@@ -198,6 +199,10 @@
     <servlet-mapping>
       <servlet-name>SearchServlet</servlet-name>
       <url-pattern>/SearchServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AcceptServlet</servlet-name>
+    	<url-pattern>/AcceptServlet</url-pattern>
     </servlet-mapping>
     
     <!-- SearchServlet mapping -->

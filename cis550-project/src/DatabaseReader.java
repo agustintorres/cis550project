@@ -332,17 +332,71 @@ public class DatabaseReader {
 		}
 	}
 	
-	public LinkedList<Friend> getFriendsByName(String name){
+	public LinkedList<User> getFriendsByName(String name, boolean pending){
 		try{
-			LinkedList<Friend> results = new LinkedList<Friend>();
+			LinkedList<User> results = new LinkedList<User>();
+			LinkedList<String> names = new LinkedList<String>();
 			
 			Connection conn = getConnection();
-			
-			PreparedStatement pstmt = conn.prepareStatement("SELECT storyid FROM STORIES WHERE url = ? AND"
-											+" name = ? AND title = ? AND private = ? AND description = ?"
-																	+" AND category = ?");
+			PreparedStatement pstmt;
 			
 			
+			pstmt = conn.prepareStatement("SELECT uid1 FROM FRIENDS WHERE uid2 = ?"
+																	+" AND pending = ?");
+			
+			
+			pstmt.setString(1, name);
+			
+			if(pending == true){
+				pstmt.setInt(2, 1);
+			}else{
+				pstmt.setInt(2, 0);
+			}
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				names.add(rs.getString(1));
+			}
+			
+			pstmt = conn.prepareStatement("SELECT uid2 FROM FRIENDS WHERE uid1 = ?"
+																+" AND pending = ?");
+			
+			pstmt.setString(1, name);
+			
+			if(pending == true){
+				pstmt.setInt(2, 1);
+			}else{
+				pstmt.setInt(2, 0);
+			}
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				names.add(rs.getString(1));
+			}
+			
+			for(int x = 0; x < names.size(); x++){
+				
+				pstmt = conn.prepareStatement("SELECT * FROM USERS WHERE name = ?");
+				pstmt.setString(1, names.get(x));
+				
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					String bday = rs.getString("dob");
+					String location = rs.getString("location");
+					String profession = rs.getString("profession");
+					
+					User tempUser = new User(names.get(x), "notreal", bday, location, profession);
+					results.add(tempUser);
+				}
+			
+			}										
+			
+			
+			pstmt.close();
+			conn.close();
 			return results;
 			
 		} catch (java.lang.Exception ex) {

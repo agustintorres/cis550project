@@ -27,7 +27,7 @@ public class AddFriendServlet extends HttpServlet
         out.println("</title>");
         out.println("<body>");
         out.println("<b>Friend added successfully</b><br><br>");
-        out.println("You added " + uid2 + " as a friend.");
+        out.println("You added " + uid2 + " as a friend. Hopefully he/she will accept.");
         out.println("</body>");
         out.println("</html>");
         out.flush();

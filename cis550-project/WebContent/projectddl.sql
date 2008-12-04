@@ -1,3 +1,14 @@
+drop table USERS;
+drop table FRIENDS;
+drop table STORIES;
+drop table CATEGORIES;
+drop table POSTS;
+drop table COMMENTS;
+drop table PARENTOF;
+drop table VOTES;
+drop table INVINDEX;
+
+
 create table USERS 
 ( 
    name VARCHAR(20) PRIMARY KEY,
