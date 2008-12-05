@@ -36,11 +36,41 @@ public class AcceptServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out = resp.getWriter();
 		HttpSession session = req.getSession(true);
 		String uid1 = (String) session.getAttribute("username");
 		String friend = req.getParameter("user");
 		
-		PrintWriter out = resp.getWriter();
+		DatabaseRecorder dr = new DatabaseRecorder();
+		boolean result = dr.addPendingFriend(uid1, friend);
+		
+		if(result == true){
+        	out.println("<html>");
+        	out.println("<head>");
+        	out.println("<title>");
+        	out.println("Friend added!");
+        	out.println("</title>");
+			out.println("<head> <meta http-equiv=\"REFRESH\" content=\"0;url=http://localhost:8080/cis550-project/viewfriend\"></HEAD>");
+	        out.println("<body>");
+	        out.println("<b>Friend added!</b><br><br>");
+	        out.println("You will now be redirected to your friends page.");
+	        out.println("</body>");
+	        out.println("</html>");
+		}else{
+        	out.println("<html>");
+        	out.println("<head>");
+        	out.println("<title>");
+        	out.println("Friend could not be added.");
+        	out.println("</title>");
+			out.println("<head> <meta http-equiv=\"REFRESH\" content=\"0;url=http://localhost:8080/cis550-project/viewfriend\"></HEAD>");
+	        out.println("<body>");
+	        out.println("<b>Friend could not be added.</b><br><br>");
+        	out.println("You will now be redirected to your friends page.");
+	        out.println("</body>");
+	        out.println("</html>");
+		}
+		
+
 		
 		out.flush();
 		

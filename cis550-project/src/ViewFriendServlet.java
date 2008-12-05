@@ -36,8 +36,11 @@ public class ViewFriendServlet extends HttpServlet{
 		out.println("<body>");
 		out.println("<b>Your Friends</b><br><br>");
 		out.println(getText(uid1, false));
-		out.println("<b>Pending Friends</b><br><br>");
-		out.println(getText(uid1, true));
+		DatabaseReader dr = new DatabaseReader();
+		if(dr.getFriendsByName(uid1, true) != null){
+			out.println("<b>Pending Friends</b><br><br>");
+			out.println(getText(uid1, true));
+		}
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
@@ -59,6 +62,8 @@ public class ViewFriendServlet extends HttpServlet{
 			out += "Profession: "+users.get(x).getProfession()+ " <br><br>";
 		}		
 		}else{
+			
+		out += "<form method=\"POST\" action=\"accept\"/>";
 		out += "<select name = \"user\">";
 		
 		
@@ -68,8 +73,7 @@ public class ViewFriendServlet extends HttpServlet{
 			}
 			
 		out += "</select> <br>";
-		out += "<form method=\"POST\" action=\"AcceptServlet\"/> "+
-		"<input type=\"submit\" value=\"Accept\" /> "+
+		out += "<input type=\"submit\" value=\"Accept\" /> "+
 		"</form>";
 			
 		}
