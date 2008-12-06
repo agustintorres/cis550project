@@ -1006,5 +1006,28 @@ public class DatabaseReader {
 			return null;
 		}   
 	}
+	
+	public int getVotesByStory(int storyid){
+		int result = 0;
+		try {
+
+			// connect to the database
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT COUNT(uid) from VOTES where storyid = " + storyid);
+			rs.next();
+			// retrieve and print the values for the current row
+			result = rs.getInt(1);
+			// close statement, connection, and output stream
+			stmt.close();
+			conn.close();
+
+		} catch (java.lang.Exception ex) {
+
+			ex.printStackTrace();
+			return -1;
+		}
+		return result;
+	}
 
 }
