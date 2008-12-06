@@ -48,9 +48,12 @@ public class VoteServlet extends HttpServlet {
 		//Return success or failure...
 		PrintWriter out = resp.getWriter();
 		out.println("<html>");
+		out.println("<head>");
 		out.println("<title>");
 		out.println("Voting Complete");
 		out.println("</title>");
+    	out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project\">");
+    	out.println("</head>");
 		out.println("<body>");
 		out.println("Voting status: " + status);
 		out.println("</body>");
