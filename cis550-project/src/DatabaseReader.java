@@ -1016,6 +1016,28 @@ public class DatabaseReader {
 		}   
 	}
 	
+	public LinkedList<Story> getStoriesByPopular(){
+		try{
+			LinkedList<Story> results = new LinkedList<Story>();
+			
+			Connection conn = getConnection();
+			PreparedStatement pstmt;
+
+			pstmt = conn.prepareStatement("SELECT storyid from VOTES GROUP BY storyid ORDER BY COUNT(uid) DESC");
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				results.add(getStoryById(rs.getInt("storyid")));
+			}
+			
+			return results;
+		}catch (java.lang.Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}   
+	}
+	
 	public int getVotesByStory(int storyid){
 		int result = 0;
 		try {
@@ -1038,5 +1060,60 @@ public class DatabaseReader {
 		}
 		return result;
 	}
+	
+	public ArrayList<Comment> getCommentsByUser(String uid){
+		ArrayList<Comment> opinions = new ArrayList<Comment>();
+		
+		try {
+
+			// connect to the database
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM COMMENTS WHERE uid=" + uid);
+			while(rs.next()){
+				
+			}
+			// retrieve and print the values for the current row
+			
+			// close statement, connection, and output stream
+			stmt.close();
+			conn.close();
+
+		} catch (java.lang.Exception ex) {
+
+			ex.printStackTrace();
+			return null;
+		}
+		
+		return opinions;
+	
+	
+	}
+	
+	public ArrayList<Story> getVotesByUser(String uid){
+		ArrayList<Story> ballot = new ArrayList<Story>();
+		try {
+
+			// connect to the database
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM VOTES WHERE uid=" + uid);
+			while(rs.next()){
+				
+			}
+			// retrieve and print the values for the current row
+			
+			// close statement, connection, and output stream
+			stmt.close();
+			conn.close();
+
+		} catch (java.lang.Exception ex) {
+
+			ex.printStackTrace();
+			return null;
+		}
+		return ballot;
+	}
+	
 
 }
