@@ -95,11 +95,12 @@ create table VOTES
 
 create table INVINDEX
 (
-   word VARCHAR(255) NOT NULL,
-   docid INTEGER NOT NULL,
-   foreign key (docid) references STORIES(storyid),
-   PRIMARY KEY (word, docid)
+	indid INTEGER AUTO_INCREMENT PRIMARY KEY,
+	word VARCHAR(255) NOT NULL,
+	docid INTEGER NOT NULL,
+	foreign key (docid) references STORIES(storyid)
 );
+
 
 
 /********************************************************************/

@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
@@ -45,7 +46,15 @@ public class IndexGeneratorServlet extends HttpServlet {
 		out.println("<br>");
 		
 		out.println("<form method=\"POST\" action=\"SearchServlet\"/>" +
-				"Search: <input name=\"searchtext\" type=\"text\" /> <br>" +
+				"Search: <input name=\"searchtext\" type=\"text\" /> " +
+				"<select name = \"searchtype\">");
+		
+		out.println("<option value =\"Keyword\">Keyword</option>"+
+				"<option value =\"Category\">Category</option>"+
+				"<option value =\"Most Recent\">Most Recent</option>"+
+				"<option value =\"Most Popular\">Most Popular</option>");
+		
+		out.println("</select> <br>" +
 				"<input type=\"submit\" value=\"Submit\" />" +
 				"</form>" +
 				"<br><br>");

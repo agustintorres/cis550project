@@ -21,8 +21,11 @@ public class SearchServlet extends HttpServlet {
 	{
 		
 		LinkedList<String> words = new LinkedList<String>();
+		HttpSession session = req.getSession(true);
+		String name =  (String) session.getAttribute("username");
 
 		String searchText = req.getParameter("searchtext");
+		String searchType = req.getParameter("searchtype");
 
 		//Parse search text
 
@@ -42,15 +45,25 @@ public class SearchServlet extends HttpServlet {
 		out.println("<body>");
 		out.println("<b>Publishing complete</b><br><br>");
 
-		out.println(getText(words, 10));
-
+		if(searchType.equals("Keyword")){
+			out.println(getKeywordSearch(words, name, 10));
+		}
+		
+		if(searchType.equals("Category")){
+			out.println(getCategorySearch(words, name, 10));
+		}
+		
+		if(searchType.equals("Most Recent")){
+			out.println(getRecentSearch(words, name, 10));
+		}
+		
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
 
 	}
 
-	public static String getText(LinkedList<String> words, int i){
+	public static String getKeywordSearch(LinkedList<String> words, String username, int i){
 
 		String out = "";
 		SearchInvertedIndex sii = new SearchInvertedIndex(words);
@@ -62,18 +75,70 @@ public class SearchServlet extends HttpServlet {
 		while(iter.hasNext())
 		{
 			headline = iter.next();
-			out += ("Title: \"" + headline.getTitle() + "\". <br>");
-			out += ("URL: \"" + headline.getURL() + "\". <br>");
+			out += ("<a href=\"" + headline.getURL() + "\">" + headline.getTitle() + "</a> . <br>");
 			out += ("Description: \"" + headline.getDescription() + "\". <br>");
 			out += ("Category: \"" + headline.getCategory() + "\". <br>");
 			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
-			out += ("Submitted by: \"" + headline.getName() + "\". <br><br><br>");
+			out += ("Submitted by: \"" + headline.getName() + "\". <br>");
+			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
 
 		}
 		////////////////////////////////////////////
 
 		return out;
 
+	}
+	
+	public static String getCategorySearch(LinkedList<String> words, String username, int i){
+		String out = "";
+		
+		DatabaseReader dr = new DatabaseReader();
+		
+		if(words.size() == 0 || words.size() > 1 || !dr.getDatabaseCategories().contains(words.get(0))){
+			out += "Improper Category";
+			return out;
+		}else{
+			LinkedList<Story> newspaper = dr.getStoriesByCategory(words.get(0));
+			
+			Iterator<Story> iter = newspaper.iterator();
+			Story headline;
+			while(iter.hasNext())
+			{
+				headline = iter.next();
+				out += ("<a href=\"" + headline.getURL() + "\">" + headline.getTitle() + "</a> . <br>");
+				out += ("Description: \"" + headline.getDescription() + "\". <br>");
+				out += ("Category: \"" + headline.getCategory() + "\". <br>");
+				out += ("Private? \"" + headline.getPrivate() + "\". <br>");
+				out += ("Submitted by: \"" + headline.getName() + "\". <br>");
+				out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
+			}
+			
+		}
+		
+		return out;
+	}
+	
+	public static String getRecentSearch(LinkedList<String> words, String username, int i){
+		String out = "";
+		
+		DatabaseReader dr = new DatabaseReader();
+		
+		LinkedList<Story> newspaper = dr.getStoriesByRecent();
+		
+		Iterator<Story> iter = newspaper.iterator();
+		Story headline;
+		while(iter.hasNext())
+		{
+			headline = iter.next();
+			out += ("<a href=\"" + headline.getURL() + "\">" + headline.getTitle() + "</a> . <br>");
+			out += ("Description: \"" + headline.getDescription() + "\". <br>");
+			out += ("Category: \"" + headline.getCategory() + "\". <br>");
+			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
+			out += ("Submitted by: \"" + headline.getName() + "\". <br>");
+			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
+		}
+		
+		return out;
 	}
 
 }
