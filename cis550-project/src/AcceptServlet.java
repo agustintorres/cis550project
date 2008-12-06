@@ -50,7 +50,7 @@ public class AcceptServlet extends HttpServlet {
         	out.println("<title>");
         	out.println("Friend added!");
         	out.println("</title>");
-			out.println("<head> <meta http-equiv=\"REFRESH\" content=\"0;url=http://localhost:8080/cis550-project/viewfriend\"></HEAD>");
+			out.println("<head> <meta http-equiv=\"REFRESH\" content=\"2;url=http://localhost:8080/cis550-project/viewfriends\"></HEAD>");
 	        out.println("<body>");
 	        out.println("<b>Friend added!</b><br><br>");
 	        out.println("You will now be redirected to your friends page.");
@@ -62,7 +62,7 @@ public class AcceptServlet extends HttpServlet {
         	out.println("<title>");
         	out.println("Friend could not be added.");
         	out.println("</title>");
-			out.println("<head> <meta http-equiv=\"REFRESH\" content=\"0;url=http://localhost:8080/cis550-project/viewfriend\"></HEAD>");
+			out.println("<head> <meta http-equiv=\"REFRESH\" content=\"2;url=http://localhost:8080/cis550-project/viewfriends\"></HEAD>");
 	        out.println("<body>");
 	        out.println("<b>Friend could not be added.</b><br><br>");
         	out.println("You will now be redirected to your friends page.");

@@ -72,7 +72,7 @@
      <!-- Map URLs to that servlet. -->
     <servlet-mapping>
       <servlet-name>ViewFriendServlet</servlet-name>
-      <url-pattern>/viewfriend</url-pattern>
+      <url-pattern>/viewfriends</url-pattern>
     </servlet-mapping>    
     
          <!-- Map URLs to that servlet. -->
@@ -87,7 +87,7 @@
       <servlet-class>RegisterServlet</servlet-class>
     </servlet>
     
-   <!-- Declare the existence of a servlet. -->
+   <!-- Declare the existence of XmlServlet. -->
     <servlet>
       <servlet-name>XmlServlet</servlet-name>
       <servlet-class>XmlGenerator</servlet-class>
@@ -151,6 +151,12 @@
       <servlet-name>AcceptServlet</servlet-name>
       <servlet-class>AcceptServlet</servlet-class>
     </servlet>
+    
+    <!-- Declare the existence of RecommendationsServlet -->
+    <servlet>
+      <servlet-name>RecommendationsServlet</servlet-name>
+      <servlet-class>RecommendationsServlet</servlet-class>
+    </servlet>
 
  
     <!-- RegisterServlet mapping -->
@@ -205,6 +211,12 @@
     <servlet-mapping>
       <servlet-name>AcceptServlet</servlet-name>
       <url-pattern>/accept</url-pattern>
+    </servlet-mapping>
+    
+    <!-- RecommendationsServlet mapping -->
+    <servlet-mapping>
+      <servlet-name>RecommendationsServlet</servlet-name>
+      <url-pattern>/recommendations</url-pattern>
     </servlet-mapping>
     
 </web-app>

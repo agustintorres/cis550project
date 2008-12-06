@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome!</title>
-<meta http-equiv="REFRESH" content="0;url=/cis550-project/home">
+
 </head>
 <body>
 
@@ -19,8 +19,8 @@
 <p>The time is now <%= new java.util.Date() %></p>
 
 <!-- Menu Bar -->
-<A HREF="index.jsp">Home</A> | <A HREF="register.html">Register</A> | <A HREF="about.html">About</A> | <A HREF="login.html">Login</A> | <A HREF="logout">Logout</A> |
-<A HREF="publish.jsp">Publish Stories</A> | <A HREF="friends.html">Friends</A> | <A HREF="addfriend.jsp">Add Friends</A>
+<A HREF="/cis550-project/home">Home</A> | <A HREF="register.html">Register</A> | <A HREF="about.html">About</A> | <A HREF="login.html">Login</A> | <A HREF="logout">Logout</A> |
+<A HREF="publish.jsp">Publish Stories</A> | <A HREF="viewfriends">Friends</A> | <A HREF="addfriend.jsp">Add Friends</A> | <A HREF="feed">RSS Feed</A> | <A HREF="recommendations">My Recommendations</A>
 <br><br>
 
 <form method="POST" action="SearchServlet"/>

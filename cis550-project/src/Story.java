@@ -26,6 +26,22 @@ public class Story {
 			
 		}
 		
+		public String toString() {
+			return Integer.toString(getStoryid());
+		}
+		
+		public boolean equals(Object obj) {
+			if ( !(obj instanceof Story) ) {
+				return false;
+			} else {
+				return this.storyid ==  ((Story) obj).getStoryid();
+			}
+		}
+		
+		public int hashCode() {
+			return Integer.valueOf(storyid).hashCode();
+		}
+		
 		public String getTitle() { return title; }
 		public String getName(){return name;}
 		public String getDescription() { return description; }

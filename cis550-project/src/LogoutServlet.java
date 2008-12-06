@@ -23,7 +23,7 @@ public class LogoutServlet extends HttpServlet
         PrintWriter out = resp.getWriter();
 
         //Get the session only if it exists (false flag) and invalidate it
-	    HttpSession session = req.getSession(false);
+	    HttpSession session = req.getSession();
 	    session.invalidate();
 	    
         

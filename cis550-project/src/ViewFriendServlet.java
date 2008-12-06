@@ -32,8 +32,10 @@ public class ViewFriendServlet extends HttpServlet{
 
 		out.println("<html>");
 		out.println("<title>");
+		out.println("Your Friends");
 		out.println("</title>");
 		out.println("<body>");
+		out.println(PageGenerator.getMenuBar());
 		out.println("<b>Your Friends</b><br><br>");
 		out.println(getText(uid1, false));
 		DatabaseReader dr = new DatabaseReader();

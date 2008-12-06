@@ -1,6 +1,8 @@
+import java.util.Iterator;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.HashSet;
 
 public class DatabaseReader {
 	
@@ -407,5 +409,445 @@ public class DatabaseReader {
 		
 	}
 	
+	// returns null if user has not published any story, otherwise:
+	// for every piece the user has published, find other users who have voted
+	// or commented upon it, and return other stories in the same category
+	// that they have either contributed, voted, or commented upon
+	public HashSet<Story> userHasPublishedAStory(String username) {
+		
+		HashSet<Story> myStories = new HashSet<Story>();
+		HashSet<String> usernames = new HashSet<String>();
+		
+		try {
+			  
+		    // connect to the database
+		    Connection conn = getConnection();
+		    		    		    
+		    // get all stories published by this user
+		    PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM STORIES WHERE name = ?");
+		    pstmt.setString(1, username);
+			
+		    ResultSet rs = pstmt.executeQuery();
+		    
+		    //if the result set is empty
+		    if (rs.first() == false) {
+		    	return null;
+		    }
+		    
+		    rs.beforeFirst();
+		    while (rs.next()) {
+				int storyid = rs.getInt("storyid");
+				String category = rs.getString("category");
+				//System.out.println("Story id: " + storyid);
+				
+				//get users who have commented or voted on this story and add them to usernames
+				PreparedStatement pstmt2 = conn.prepareStatement("SELECT DISTINCT uid FROM ( SELECT DISTINCT uid FROM COMMENTS WHERE storyid = ? UNION SELECT DISTINCT uid FROM VOTES WHERE storyid = ? ) Tempo");
+				pstmt2.setInt(1, storyid);
+				pstmt2.setInt(2, storyid);
+				ResultSet rs2 = pstmt2.executeQuery();
+				while (rs2.next()) {
+					String user = rs2.getString(1);
+					usernames.add(user);
+				}
+				
+				//System.out.println("usernames: " + usernames.toString());
+				
+				//for each user, get stories in the same category that the user has 
+			    //contributed, voted, or commented upon
+			    Iterator<String> iter = usernames.iterator();
+			    while (iter.hasNext()) {
+			    	username = iter.next();
+			    	
+			    	//get stories in the same category that the user has contributed
+					PreparedStatement pstmt4 = conn.prepareStatement("SELECT * FROM STORIES WHERE name = ? and category = ?");
+					pstmt4.setString(1, username);
+					pstmt4.setString(2, category);
+					ResultSet rs4 = pstmt4.executeQuery();
+					while (rs4.next()) {
+						Story tempStory = new Story();
+						String myurl = rs4.getString("url");
+						String mytitle = rs4.getString("title");
+						String myname = rs4.getString("name");
+						int myprivate = rs4.getInt("private");
+						String mydescription = rs4.getString("description");
+						String mystorytime = rs4.getString("storytime");
+						int myvotes = rs4.getInt("votes");
+						String mycategory = rs4.getString("category");
+						int mystoryid = rs4.getInt("storyid");
+						
+						tempStory.setTitle(mytitle);
+						tempStory.setName(myname);
+						tempStory.setDescription(mydescription);
+						tempStory.setURL(myurl);
+						tempStory.setCategory(mycategory);
+						tempStory.setPrivate(myprivate);
+						tempStory.setVotes(myvotes);
+						tempStory.setStorytime(mystorytime);
+						tempStory.setStoryid(mystoryid);
+						
+						myStories.add(tempStory);
+					}
+					
+					// get stories in the same category that the user has voted or commented upon
+					PreparedStatement pstmt5 = conn.prepareStatement("SELECT DISTINCT storyid FROM (SELECT DISTINCT storyid FROM VOTES WHERE uid = ? UNION SELECT DISTINCT storyid FROM COMMENTS where uid = ?) Temp");
+					pstmt5.setString(1, username);
+					pstmt5.setString(2, username);
+					ResultSet rs5 = pstmt5.executeQuery();
+					//System.out.println("myStories:" + myStories.toString());
+					while (rs5.next()) {
+						storyid = rs5.getInt("storyid");
+						
+						//get the story with this storyid, should be only 1
+						ArrayList<Story> stories = getStories(1, storyid, 1);
+						Story story = stories.get(0);
+						//add it only if it's in the same category
+						if (story.getCategory().equals(category)) {
+							myStories.add(stories.get(0));
+						}
+					}
+					
+			    }
+			}
+			  
+			// close statement, connection, and output stream
+			pstmt.close();
+			conn.close();
+			return myStories;
+		    } catch (java.sql.SQLException ex) {
+		    	ex.printStackTrace();
+		    	return null;
+		    }   
+	}
+	
+	// returns null if user has not voted on any story, otherwise:
+	// for every piece the user has voted on, find other users who have voted
+	// or commented upon it, and return other stories in the same category
+	// that they have either contributed, voted, or commented upon
+	public HashSet<Story> userHasVotedOnAStory(String username) {
+	
+		HashSet<Story> myStories = new HashSet<Story>();
+		HashSet<Story> userStories = new HashSet<Story>();
+		HashSet<String> usernames = new HashSet<String>();
+		
+		try {
+			  
+		    // connect to the database
+		    Connection conn = getConnection();
+		    		    		    
+		    // get all stories voted uponby this user
+		    PreparedStatement pstmt = conn.prepareStatement("SELECT storyid FROM VOTES WHERE uid = ?");
+		    pstmt.setString(1, username);
+			
+		    ResultSet rs = pstmt.executeQuery();
+		    
+		    //if the result set is empty
+		    if (rs.first() == false) {
+		    	return null;
+		    }
+		    
+		    rs.beforeFirst();
+		    
+		    // get the entire stories corresponding to these storyid
+		    while (rs.next()) {
+		    	int storyid = rs.getInt(1);
+		    	PreparedStatement pstmt2 = conn.prepareStatement("SELECT DISTINCT * FROM STORIES WHERE storyid = ?");
+		    	pstmt2.setInt(1, storyid);
+		    	ResultSet rs2 = pstmt2.executeQuery();
+		    	//there should be only one story matching this storyid
+		    	while (rs2.next()) {
+		    		Story tempStory = new Story();
+		    		String myurl = rs2.getString("url");
+		    		String mytitle = rs2.getString("title");
+					String myname = rs2.getString("name");
+					int myprivate = rs2.getInt("private");
+					String mydescription = rs2.getString("description");
+					String mystorytime = rs2.getString("storytime");
+					int myvotes = rs2.getInt("votes");
+					String mycategory = rs2.getString("category");
+					int mystoryid = rs2.getInt("storyid");
+					
+					tempStory.setTitle(mytitle);
+					tempStory.setName(myname);
+					tempStory.setDescription(mydescription);
+					tempStory.setURL(myurl);
+					tempStory.setCategory(mycategory);
+					tempStory.setPrivate(myprivate);
+					tempStory.setVotes(myvotes);
+					tempStory.setStorytime(mystorytime);
+					tempStory.setStoryid(mystoryid);
+					
+					userStories.add(tempStory);
+		    	}
+			}
+		    System.out.println("myStories:" + myStories.toString());
+			
+		    Iterator<Story> iter = userStories.iterator();
+		    while (iter.hasNext()) {
+				Story currstory = iter.next();
+		    	int storyid = currstory.getStoryid();
+				String category = currstory.getCategory();
+				//System.out.println("Story id: " + storyid);
+				
+				//get users who have commented or voted on this story and add them to usernames
+				PreparedStatement pstmt3 = conn.prepareStatement("SELECT DISTINCT uid FROM ( SELECT DISTINCT uid FROM COMMENTS WHERE storyid = ? UNION SELECT DISTINCT uid FROM VOTES WHERE storyid = ? ) Tempo");
+				pstmt3.setInt(1, storyid);
+				pstmt3.setInt(2, storyid);
+				ResultSet rs3 = pstmt3.executeQuery();
+				while (rs3.next()) {
+					String user = rs3.getString(1);
+					usernames.add(user);
+				}
+				
+				//System.out.println("usernames: " + usernames.toString());
+				
+				//for each user, get stories in the same category that the user has 
+			    //contributed, voted, or commented upon
+			    Iterator<String> iter2 = usernames.iterator();
+			    while (iter2.hasNext()) {
+			    	username = iter2.next();
+			    	
+			    	//get stories in the same category that the user has contributed
+					PreparedStatement pstmt4 = conn.prepareStatement("SELECT * FROM STORIES WHERE name = ? and category = ?");
+					pstmt4.setString(1, username);
+					pstmt4.setString(2, category);
+					ResultSet rs4 = pstmt4.executeQuery();
+					while (rs4.next()) {
+						Story tempStory = new Story();
+						String myurl = rs4.getString("url");
+						String mytitle = rs4.getString("title");
+						String myname = rs4.getString("name");
+						int myprivate = rs4.getInt("private");
+						String mydescription = rs4.getString("description");
+						String mystorytime = rs4.getString("storytime");
+						int myvotes = rs4.getInt("votes");
+						String mycategory = rs4.getString("category");
+						int mystoryid = rs4.getInt("storyid");
+						
+						tempStory.setTitle(mytitle);
+						tempStory.setName(myname);
+						tempStory.setDescription(mydescription);
+						tempStory.setURL(myurl);
+						tempStory.setCategory(mycategory);
+						tempStory.setPrivate(myprivate);
+						tempStory.setVotes(myvotes);
+						tempStory.setStorytime(mystorytime);
+						tempStory.setStoryid(mystoryid);
+						
+						myStories.add(tempStory);
+					}
+					
+					// get stories in the same category that the user has voted or commented upon
+					PreparedStatement pstmt5 = conn.prepareStatement("SELECT DISTINCT storyid FROM (SELECT DISTINCT storyid FROM VOTES WHERE uid = ? UNION SELECT DISTINCT storyid FROM COMMENTS where uid = ?) Temp");
+					pstmt5.setString(1, username);
+					pstmt5.setString(2, username);
+					ResultSet rs5 = pstmt5.executeQuery();
+					//System.out.println("myStories:" + myStories.toString());
+					while (rs5.next()) {
+						storyid = rs5.getInt("storyid");
+						
+						//get the story with this storyid, should be only 1
+						ArrayList<Story> stories = getStories(1, storyid, 1);
+						Story story = stories.get(0);
+						//add it only if it's in the same category
+						if (story.getCategory().equals(category)) {
+							myStories.add(stories.get(0));
+						}
+					}
+					
+			    }
+		    }
+			  
+			// close statement, connection, and output stream
+			pstmt.close();
+			conn.close();
+			return myStories;
+		    } catch (java.sql.SQLException ex) {
+		    	ex.printStackTrace();
+		    	return null;
+		    }   
+	}
+	
+	// returns null if user has not commented on any story, otherwise:
+	// for every piece the user has commented on, find other users who have voted
+	// or commented upon it, and return other stories in the same category
+	// that they have either contributed, voted, or commented upon
+	public HashSet<Story> userHasCommentedOnAStory(String username) {
+	
+		HashSet<Story> userStories = new HashSet<Story>();
+		HashSet<Story> myStories = new HashSet<Story>();
+		HashSet<String> usernames = new HashSet<String>();
+		
+		try {
+			  
+		    // connect to the database
+		    Connection conn = getConnection();
+		    		    		    
+		    // get all stories commented upon by this user
+		    PreparedStatement pstmt = conn.prepareStatement("SELECT storyid FROM COMMENTS WHERE uid = ?");
+		    pstmt.setString(1, username);
+			
+		    ResultSet rs = pstmt.executeQuery();
+		    
+		    //if the result set is empty
+		    if (rs.first() == false) {
+		    	return null;
+		    }
+		    
+		    rs.beforeFirst();
+		    
+		    // get the entire stories corresponding to these storyid
+		    while (rs.next()) {
+		    	int storyid = rs.getInt(1);
+		    	PreparedStatement pstmt2 = conn.prepareStatement("SELECT DISTINCT * FROM STORIES WHERE storyid = ?");
+		    	pstmt2.setInt(1, storyid);
+		    	ResultSet rs2 = pstmt2.executeQuery();
+		    	//there should be only one story matching this storyid
+		    	while (rs2.next()) {
+		    		Story tempStory = new Story();
+		    		String myurl = rs2.getString("url");
+		    		String mytitle = rs2.getString("title");
+					String myname = rs2.getString("name");
+					int myprivate = rs2.getInt("private");
+					String mydescription = rs2.getString("description");
+					String mystorytime = rs2.getString("storytime");
+					int myvotes = rs2.getInt("votes");
+					String mycategory = rs2.getString("category");
+					int mystoryid = rs2.getInt("storyid");
+					
+					tempStory.setTitle(mytitle);
+					tempStory.setName(myname);
+					tempStory.setDescription(mydescription);
+					tempStory.setURL(myurl);
+					tempStory.setCategory(mycategory);
+					tempStory.setPrivate(myprivate);
+					tempStory.setVotes(myvotes);
+					tempStory.setStorytime(mystorytime);
+					tempStory.setStoryid(mystoryid);
+					
+					userStories.add(tempStory);
+		    	}
+			}
+		    System.out.println("myStories:" + myStories.toString());
+			
+		    Iterator<Story> iter = userStories.iterator();
+		    while (iter.hasNext()) {
+				Story currstory = iter.next();
+		    	int storyid = currstory.getStoryid();
+				String category = currstory.getCategory();
+				//System.out.println("Story id: " + storyid);
+				
+				//get users who have commented or voted on this story and add them to usernames
+				PreparedStatement pstmt3 = conn.prepareStatement("SELECT DISTINCT uid FROM ( SELECT DISTINCT uid FROM COMMENTS WHERE storyid = ? UNION SELECT DISTINCT uid FROM VOTES WHERE storyid = ? ) Tempo");
+				pstmt3.setInt(1, storyid);
+				pstmt3.setInt(2, storyid);
+				ResultSet rs3 = pstmt3.executeQuery();
+				while (rs3.next()) {
+					String user = rs3.getString(1);
+					usernames.add(user);
+				}
+				
+				//System.out.println("usernames: " + usernames.toString());
+				
+				//for each user, get stories in the same category that the user has 
+			    //contributed, voted, or commented upon
+			    Iterator<String> iter2 = usernames.iterator();
+			    while (iter2.hasNext()) {
+			    	username = iter2.next();
+			    	
+			    	//get stories in the same category that the user has contributed
+					PreparedStatement pstmt4 = conn.prepareStatement("SELECT * FROM STORIES WHERE name = ? and category = ?");
+					pstmt4.setString(1, username);
+					pstmt4.setString(2, category);
+					ResultSet rs4 = pstmt4.executeQuery();
+					while (rs4.next()) {
+						Story tempStory = new Story();
+						String myurl = rs4.getString("url");
+						String mytitle = rs4.getString("title");
+						String myname = rs4.getString("name");
+						int myprivate = rs4.getInt("private");
+						String mydescription = rs4.getString("description");
+						String mystorytime = rs4.getString("storytime");
+						int myvotes = rs4.getInt("votes");
+						String mycategory = rs4.getString("category");
+						int mystoryid = rs4.getInt("storyid");
+						
+						tempStory.setTitle(mytitle);
+						tempStory.setName(myname);
+						tempStory.setDescription(mydescription);
+						tempStory.setURL(myurl);
+						tempStory.setCategory(mycategory);
+						tempStory.setPrivate(myprivate);
+						tempStory.setVotes(myvotes);
+						tempStory.setStorytime(mystorytime);
+						tempStory.setStoryid(mystoryid);
+						
+						myStories.add(tempStory);
+					}
+					
+					// get stories in the same category that the user has voted or commented upon
+					PreparedStatement pstmt5 = conn.prepareStatement("SELECT DISTINCT storyid FROM (SELECT DISTINCT storyid FROM VOTES WHERE uid = ? UNION SELECT DISTINCT storyid FROM COMMENTS where uid = ?) Temp");
+					pstmt5.setString(1, username);
+					pstmt5.setString(2, username);
+					ResultSet rs5 = pstmt5.executeQuery();
+					//System.out.println("myStories:" + myStories.toString());
+					while (rs5.next()) {
+						storyid = rs5.getInt("storyid");
+						
+						//get the story with this storyid, should be only 1
+						ArrayList<Story> stories = getStories(1, storyid, 1);
+						Story story = stories.get(0);
+						//add it only if it's in the same category
+						if (story.getCategory().equals(category)) {
+							myStories.add(stories.get(0));
+						}
+					}
+					
+			    }
+		    }
+			  
+			// close statement, connection, and output stream
+			pstmt.close();
+			conn.close();
+			return myStories;
+		    } catch (java.sql.SQLException ex) {
+		    	ex.printStackTrace();
+		    	return null;
+		    }   
+	}
+	
+	public ArrayList<Story> getRecommendations(String username) {
+		//use JDBC to insert this user into the database
+		  try {
+			  
+		    // connect to the database
+		    Connection conn = getConnection();
+		    
+		    boolean userHasSharedVotedOrCommended = false;
+		    
+		    HashSet<Story> pstories = userHasPublishedAStory(username);
+		    HashSet<Story> vstories = userHasVotedOnAStory(username);
+		    HashSet<Story> cstories = userHasCommentedOnAStory(username);
+		    
+		    if ( (pstories == null) && (vstories == null) && (cstories ==null) ) {
+		    	//for each category, get the most popular story and the storie with the highest number of comments
+		    }
 
+		    HashSet<Story> recommendedStories = new HashSet<Story>();
+		    recommendedStories.addAll(pstories);
+		    recommendedStories.addAll(vstories);
+		    recommendedStories.addAll(cstories);
+		    
+		    //display the recommended stories
+		    
+			
+			// close statement, connection, and output stream
+			//pstmt.close();
+			conn.close();
+		    } catch (java.sql.SQLException ex) {
+		    	//ex.printStackTrace();
+		    	//return false;
+		    }   
+		    return null;
+	}
+	
 }
