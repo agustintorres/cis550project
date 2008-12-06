@@ -52,7 +52,7 @@ public class VoteServlet extends HttpServlet {
 		out.println("<title>");
 		out.println("Voting Complete");
 		out.println("</title>");
-    	out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project\">");
+		out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project/detail?sid=" + theStory + "&uid=" + theUser + "\">");
     	out.println("</head>");
 		out.println("<body>");
 		out.println("Voting status: " + status);

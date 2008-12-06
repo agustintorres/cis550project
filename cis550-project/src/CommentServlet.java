@@ -42,9 +42,12 @@ public class CommentServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 
 		out.println("<html>");
+		out.println("<head>");
 		out.println("<title>");
 		out.println("Commenting Complete");
 		out.println("</title>");
+		out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project/detail?sid=" + storyid + "&uid=" + username + "\">");
+		out.println("</head>");
 		out.println("<body>");
 		if (status){
 			out.println("<b>Commenting complete</b><br><br>");

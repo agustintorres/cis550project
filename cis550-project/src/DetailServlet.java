@@ -58,8 +58,11 @@ public class DetailServlet extends HttpServlet {
 		if(!(theUser.equals("notloggedin"))){		
 		out.println("<a href=\"/cis550-project/vote?sid=" + theStory + "&uid="+ theUser +"\">Vote!</a>");
 		
-		out.println("<a href=\"/cis550-project/comment?sid=" + theStory + "&uid="+ theUser + "&commenttext=blahblahcomment" + "\">Comment!</a>");
+		//old-style commenting:
+		//out.println("<a href=\"/cis550-project/comment?sid=" + theStory + "&uid="+ theUser + "&commenttext=blahblahcomment" + "\">Comment!</a>");
+		
 		}
+		
 		//list all other comments
 		
 		ArrayList<Comment> chatlog = drdr.getComments(theStory);
@@ -75,13 +78,18 @@ public class DetailServlet extends HttpServlet {
 			out.println("No comments found. <br><br>");
 		}
 		//give comment option
+		
+		//needs sid and uid
 		out.println("<br><br>");
-		out.println("<form method=\"POST\" action=\"CommentServlet\"/>" +
-				"Comment: <input name=\"commentText\" type=\"text\" /> <br>" +
+		out.println("<form method=\"POST\" action=\"comment\"/>" +
+				"Comment: <input name=\"commenttext\" type=\"text\" /> <br>" +
+				"<input name=\"uid\" type=\"hidden\" value=\"" + theUser + "\" /> <br>" +
+				"<input name=\"sid\" type=\"hidden\" value=\"" + theStory + "\" /> <br>" +
 				"<input type=\"submit\" value=\"Submit\" />" +
 				"</form>" +
 				"<br><br>");
 		
+
 		
 		out.println("</body>");
 		out.println("</html>");
