@@ -19,7 +19,30 @@ public class XmlGenerator extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException
 	{
-
+		String theUser = req.getParameter("uid");
+		//get user's most recent stories, comments, votes
+		
+		//stories posted by that user
+		//SELECT * FROM STORIES where name='mattwonder';
+		
+		
+		//comments posted by that user
+		//SELECT * FROM COMMENTS WHERE uid='mattwonder';
+		/*
+		 * need:
+		 * username
+		 * comment text
+		 * comment time
+		 * on story
+		 */
+		
+		//votes made by that user
+		//SELECT * FROM VOTES WHERE uid='mattwonder';
+		/* need:
+		 * username
+		 * time
+		 * story
+		 */
 
 		PrintWriter out = resp.getWriter();
 		out.println("<?xml version=\"1.0\"?>");
