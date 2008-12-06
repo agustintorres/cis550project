@@ -1,5 +1,7 @@
 import java.sql.*;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 public class DatabaseRecorder {
 
@@ -21,6 +23,29 @@ public class DatabaseRecorder {
 		}
 	}
 
+	public void removeStories(List<CrawlerLink> dead){
+		if (dead.size() > 0) {
+		try {
+			Connection conn = getConnection();
+			Iterator<CrawlerLink> iter = dead.iterator();
+			while(iter.hasNext()){
+				CrawlerLink current = iter.next();
+				String myQuery = "";
+				myQuery = ("DELETE FROM STORIES WHERE storyid = " + current.getLinkid());				
+				PreparedStatement pstmt = conn.prepareStatement(myQuery);
+				System.out.println(pstmt);
+				pstmt.executeUpdate();
+				System.out.println("query was executed successfully!");
+				pstmt.close();
+			}
+			conn.close();
+		} catch (java.lang.Exception ex) {
+
+			ex.printStackTrace();
+		}
+	}
+	}
+	
 	public boolean recordComment(int storyid, String username, String text){
 		//cid
 		//+uid

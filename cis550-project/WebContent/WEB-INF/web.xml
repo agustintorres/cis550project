@@ -49,7 +49,19 @@
     <servlet-mapping>
       <servlet-name>CommentServlet</servlet-name>
       <url-pattern>/comment</url-pattern>
-    </servlet-mapping>    
+    </servlet-mapping>
+    
+    <!-- Declare the existence of a servlet. -->
+    <servlet>
+      <servlet-name>CleanDeadLinks</servlet-name>
+      <servlet-class>CrawlerServlet</servlet-class>
+    </servlet>
+    
+     <!-- Map URLs to that servlet. -->
+    <servlet-mapping>
+      <servlet-name>CleanDeadLinks</servlet-name>
+      <url-pattern>/cleandead</url-pattern>
+    </servlet-mapping>     
 
     <!-- Declare the existence of a servlet. -->
     <servlet>

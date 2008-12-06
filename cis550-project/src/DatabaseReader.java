@@ -62,6 +62,41 @@ public class DatabaseReader {
 		return outStory;
 	}
 	
+	public ArrayList<CrawlerLink> getLinks(){
+		ArrayList<CrawlerLink> book = new ArrayList<CrawlerLink>();
+		//select all links and ids from tables
+		try {
+			
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs;
+			String myQuery = "";
+			
+			myQuery = ("SELECT url, storyid FROM STORIES");
+
+			
+			rs = stmt.executeQuery(myQuery);
+			
+			while(rs.next())
+			{
+				CrawlerLink tempLink = new CrawlerLink(rs.getString("url"), rs.getInt("storyid"));
+				// retrieve and print the values for the current row
+				book.add(tempLink);
+			}
+			stmt.close();
+			conn.close();
+			
+			    } catch (java.lang.Exception ex) {
+			
+			        ex.printStackTrace();
+					return null;
+			    }
+		//turn into objects, put into arraylist
+		
+		
+		return book;
+	}
+	
 	public ArrayList<Comment> getComments(int storyId){
 		ArrayList<Comment> chat = new ArrayList<Comment>();
 		try {
