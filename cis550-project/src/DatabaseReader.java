@@ -183,7 +183,8 @@ public class DatabaseReader {
 				int myprivate = rs.getInt("private");
 				String mydescription = rs.getString("description");
 				String mystorytime = rs.getString("storytime");
-				int myvotes = rs.getInt("votes");
+				//int myvotes = rs.getInt("votes");
+				int myvotes = getVotesByStory(rs.getInt("storyid"));
 				String mycategory = rs.getString("category");
 				int mystoryid = rs.getInt("storyid");
 
@@ -228,7 +229,8 @@ public class DatabaseReader {
 			int myprivate = rs.getInt("private");
 			String mydescription = rs.getString("description");
 			String mystorytime = rs.getString("storytime");
-			int myvotes = rs.getInt("votes");
+			//int myvotes = rs.getInt("votes");
+			int myvotes = getVotesByStory(rs.getInt("storyid"));
 			String mycategory = rs.getString("category");
 
 			tempStory.setTitle(mytitle);
@@ -535,7 +537,8 @@ public class DatabaseReader {
 						int myprivate = rs4.getInt("private");
 						String mydescription = rs4.getString("description");
 						String mystorytime = rs4.getString("storytime");
-						int myvotes = rs4.getInt("votes");
+						//int myvotes = rs.getInt("votes");
+						int myvotes = getVotesByStory(rs4.getInt("storyid"));
 						String mycategory = rs4.getString("category");
 						int mystoryid = rs4.getInt("storyid");
 
@@ -626,7 +629,8 @@ public class DatabaseReader {
 					int myprivate = rs2.getInt("private");
 					String mydescription = rs2.getString("description");
 					String mystorytime = rs2.getString("storytime");
-					int myvotes = rs2.getInt("votes");
+					//int myvotes = rs.getInt("votes");
+					int myvotes = getVotesByStory(rs2.getInt("storyid"));
 					String mycategory = rs2.getString("category");
 					int mystoryid = rs2.getInt("storyid");
 
@@ -683,7 +687,8 @@ public class DatabaseReader {
 						int myprivate = rs4.getInt("private");
 						String mydescription = rs4.getString("description");
 						String mystorytime = rs4.getString("storytime");
-						int myvotes = rs4.getInt("votes");
+						//int myvotes = rs.getInt("votes");
+						int myvotes = getVotesByStory(rs4.getInt("storyid"));
 						String mycategory = rs4.getString("category");
 						int mystoryid = rs4.getInt("storyid");
 
@@ -774,7 +779,8 @@ public class DatabaseReader {
 					int myprivate = rs2.getInt("private");
 					String mydescription = rs2.getString("description");
 					String mystorytime = rs2.getString("storytime");
-					int myvotes = rs2.getInt("votes");
+					//int myvotes = rs.getInt("votes");
+					int myvotes = getVotesByStory(rs2.getInt("storyid"));
 					String mycategory = rs2.getString("category");
 					int mystoryid = rs2.getInt("storyid");
 
@@ -831,7 +837,8 @@ public class DatabaseReader {
 						int myprivate = rs4.getInt("private");
 						String mydescription = rs4.getString("description");
 						String mystorytime = rs4.getString("storytime");
-						int myvotes = rs4.getInt("votes");
+						//int myvotes = rs.getInt("votes");
+						int myvotes = getVotesByStory(rs4.getInt("storyid"));
 						String mycategory = rs4.getString("category");
 						int mystoryid = rs4.getInt("storyid");
 
@@ -937,7 +944,8 @@ public class DatabaseReader {
 				int myprivate = rs.getInt("private");
 				String mydescription = rs.getString("description");
 				String mystorytime = rs.getString("storytime");
-				int myvotes = rs.getInt("votes");
+				//int myvotes = rs.getInt("votes");
+				int myvotes = getVotesByStory(rs.getInt("storyid"));
 				String mycategory = rs.getString("category");
 				int mystoryid = rs.getInt("storyid");
 
@@ -983,7 +991,8 @@ public class DatabaseReader {
 				int myprivate = rs.getInt("private");
 				String mydescription = rs.getString("description");
 				String mystorytime = rs.getString("storytime");
-				int myvotes = rs.getInt("votes");
+				//int myvotes = rs.getInt("votes");
+				int myvotes = getVotesByStory(rs.getInt("storyid"));
 				String mycategory = rs.getString("category");
 				int mystoryid = rs.getInt("storyid");
 
