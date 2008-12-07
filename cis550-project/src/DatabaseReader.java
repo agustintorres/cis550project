@@ -239,6 +239,7 @@ public class DatabaseReader {
 				tempStory.setURL(myurl);
 				tempStory.setCategory(mycategory);
 				tempStory.setPrivate(myprivate);
+				tempStory.setVotes(myvotes);
 
 		System.out.println("query was executed successfully!");
 	    
@@ -1068,11 +1069,20 @@ public class DatabaseReader {
 		try {
 
 			// connect to the database
+			Comment tempComment;
 			Connection conn = getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM COMMENTS WHERE uid=" + uid);
+			ResultSet rs = stmt.executeQuery("SELECT c.text, c.uid, c.commenttime, s.title, s.url FROM COMMENTS c, STORIES s WHERE s.storyid = c.storyid AND c.uid="+uid);
 			while(rs.next()){
+				tempComment = new Comment();
 				
+				tempComment.setText(rs.getString("text"));
+				tempComment.setAuthor(rs.getString("uid"));
+				tempComment.setCommenttime(rs.getString("commenttime"));
+				tempComment.setStorytitle(rs.getString("title"));
+				tempComment.setStorylink(rs.getString("url"));
+								
+				opinions.add(tempComment);
 			}
 			// retrieve and print the values for the current row
 			
@@ -1096,11 +1106,33 @@ public class DatabaseReader {
 		try {
 
 			// connect to the database
+			Story tempStory;
 			Connection conn = getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM VOTES WHERE uid=" + uid);
+			ResultSet rs = stmt.executeQuery("SELECT s.* FROM VOTES v, STORIES s WHERE uid=" + uid + " AND s.storyid = v.storyid");
 			while(rs.next()){
-				
+				tempStory = new Story();
+				// retrieve and print the values for the current row
+				String myurl = rs.getString("url");
+				String mytitle = rs.getString("title");
+				String myname = rs.getString("name");
+				int myprivate = rs.getInt("private");
+				String mydescription = rs.getString("description");
+				String mystorytime = rs.getString("storytime");
+				int myvotes = getVotesByStory(rs.getInt("storyid"));
+				String mycategory = rs.getString("category");
+				int mystoryid = rs.getInt("storyid");
+								
+				tempStory.setTitle(mytitle);
+				tempStory.setName(myname);
+				tempStory.setDescription(mydescription);
+				tempStory.setURL(myurl);
+				tempStory.setCategory(mycategory);
+				tempStory.setPrivate(myprivate);
+				tempStory.setVotes(myvotes);
+				tempStory.setStorytime(mystorytime);
+				tempStory.setStoryid(mystoryid);
+				ballot.add(tempStory);
 			}
 			// retrieve and print the values for the current row
 			
@@ -1207,6 +1239,53 @@ public class DatabaseReader {
 		        ex.printStackTrace();
 				return null;
 		    }
+	}
+	
+	public ArrayList<Story> getStoriesByUser(String username){
+		ArrayList<Story> myStories = new ArrayList<Story>();
+		try {	
+			Connection conn = getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs;
+			String myQuery = "";
+			myQuery = ("SELECT * FROM STORIES WHERE name = " + username);
+				
+			rs = stmt.executeQuery(myQuery);
+				
+			while(rs.next())
+			{
+				Story tempStory = new Story();
+				// retrieve and print the values for the current row
+				String myurl = rs.getString("url");
+				String mytitle = rs.getString("title");
+				String myname = rs.getString("name");
+				int myprivate = rs.getInt("private");
+				String mydescription = rs.getString("description");
+				String mystorytime = rs.getString("storytime");
+				int myvotes = getVotesByStory(rs.getInt("storyid"));
+				String mycategory = rs.getString("category");
+				int mystoryid = rs.getInt("storyid");
+								
+				tempStory.setTitle(mytitle);
+				tempStory.setName(myname);
+				tempStory.setDescription(mydescription);
+				tempStory.setURL(myurl);
+				tempStory.setCategory(mycategory);
+				tempStory.setPrivate(myprivate);
+				tempStory.setVotes(myvotes);
+				tempStory.setStorytime(mystorytime);
+				tempStory.setStoryid(mystoryid);
+				myStories.add(tempStory);
+					
+			}
+			stmt.close();
+			conn.close();
+			return myStories;
+				
+			} catch (java.lang.Exception ex) {			
+		        ex.printStackTrace();
+						return null;
+			}	
 	}
 	
 }
