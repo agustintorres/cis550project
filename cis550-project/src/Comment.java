@@ -6,6 +6,8 @@ public class Comment {
 		private String author;
 		private int story;
 		private String commenttime;
+		private String storytitle;
+		private String storylink;
 		
 		public String getCommenttime() {
 			return commenttime;
@@ -13,6 +15,22 @@ public class Comment {
 
 		public void setCommenttime(String commenttime) {
 			this.commenttime = commenttime;
+		}
+
+		public String getStorytitle() {
+			return storytitle;
+		}
+
+		public void setStorytitle(String storytitle) {
+			this.storytitle = storytitle;
+		}
+
+		public String getStorylink() {
+			return storylink;
+		}
+
+		public void setStorylink(String storylink) {
+			this.storylink = storylink;
 		}
 
 		public Comment(String text, String author, int story) {
