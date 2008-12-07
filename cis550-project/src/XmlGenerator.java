@@ -94,14 +94,107 @@ public class XmlGenerator extends HttpServlet {
 		      <guid>http://liftoff.msfc.nasa.gov/2003/05/20.html#item570</guid>
 		    </item>
 		    */
-		out.println(ViewStories.getXml(10));
+		//out.println(ViewStories.getXml(10));
+		out.println(getAllXml(theUser));
+		
 		out.println("</channel>");
 		out.println("</rss>");
-
-
 		out.flush();
-		
-
 	}
+	
+	public static String getAllXml(String username){
+		String out = "";
+		DatabaseReader dr = new DatabaseReader();
+		ArrayList<Story> newspaper;
+		ArrayList<Comment> complaints;
+		ArrayList<Story> ballot;
+		
+		newspaper = dr.getStoriesByUser(username);
+		complaints = dr.getCommentsByUser(username);
+		ballot = dr.getVotesByUser(username);
+		
+		
+		///////////////////////////////////////////
+		Iterator<Story> iter = newspaper.iterator();
+		Story headline;
+		while(iter.hasNext())
+		{
+			headline = iter.next();
+			out += ("<item> \n");
+			out += ("<tag>Story</tag> \n");
+			out += ("<title>" + headline.getTitle() + "</title> \n");		
+			out += ("<link>" + headline.getURL() + "</link> \n");	
+			out += ("<description>" + headline.getDescription() + "</description> \n");
+			out += ("</item>");
+			out += ("\n");
+		}
+		////////////////////////////////////////////
+		///////////////////////////////////////////
+		iter = ballot.iterator();
+		while(iter.hasNext())
+		{
+			headline = iter.next();
+			out += ("<item> \n");
+			out += ("<tag>Vote</tag> \n");
+			out += ("<title> Voted on: " + headline.getTitle() + "</title> \n");		
+			out += ("<link>" + headline.getURL() + "</link> \n");			
+			out += ("<description>" + headline.getDescription() + "</description> \n");
+			out += ("</item>");
+			out += ("\n");
+		}
+		////////////////////////////////////////////
+		///////////////////////////////////////////
+		Iterator<Comment> iterc = complaints.iterator();
+		Comment quip;
+		while(iter.hasNext())
+		{
+			quip = iterc.next();
+			out += ("<item> \n");
+			out += ("<tag>Comment</tag> \n");
+			out += ("<title>" + quip.getStorytitle() + "</title> \n");			
+			out += ("<link>" + quip.getStorylink() + "</link> \n");		
+			out += ("<description>"+ username + " said " + quip.getText() + "</description> \n");
+			out += ("<commentTime>"+ quip.getCommenttime()+ "</commentTime>");
+			out += ("</item>");
+			out += ("\n");
+		}
+		////////////////////////////////////////////
+		
+		return out;	
+	}
+	
 
+	public static String getStoryXml(String username) {
+		String out = "";
+		DatabaseReader dr = new DatabaseReader();
+		ArrayList<Story> newspaper;
+		
+		newspaper = dr.getStories(10);
+		
+		///////////////////////////////////////////
+		Iterator<Story> iter = newspaper.iterator();
+		Story headline;
+		while(iter.hasNext())
+		{
+			headline = iter.next();
+			out += ("<item> \n");
+			out += ("<title>" + headline.getTitle() + "</title> \n");
+			//out += ("Title: \"" + headline.getTitle() + "\". <br>");
+			
+			out += ("<link>" + headline.getURL() + "</link> \n");
+			//out += ("URL: \"" + headline.getURL() + "\". <br>");
+			
+			out += ("<description>" + headline.getDescription() + "</description> \n");
+			//out += ("Description: \"" + headline.getDescription() + "\". <br>");
+			//out += ("Category: \"" + headline.getCategory() + "\". <br>");
+			//out += ("Private? \"" + headline.getPrivate() + "\". <br>");
+			//out += ("Submitted by: \"" + headline.getName() + "\". <br><br><br>");
+			
+			out += ("</item>");
+			out += ("\n");
+		}
+		////////////////////////////////////////////
+		
+		return out;		
+	}
 }
