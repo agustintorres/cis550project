@@ -67,31 +67,52 @@ public static String getText(String username){
 		
 		String out = "";
 		DatabaseReader dr = new DatabaseReader();
-		//LinkedList<User> users = dr.getFriendsByName(uid1, pending);
 		
 		HashSet<Story> pstories = dr.userHasPublishedAStory(username);
 	    HashSet<Story> vstories = dr.userHasVotedOnAStory(username);
 	    HashSet<Story> cstories = dr.userHasCommentedOnAStory(username);
 	    
-	    if ( (pstories == null) && (vstories == null) && (cstories ==null) ) {
-	    	//for each category, get the most popular story and the storie with the highest number of comments
-	    	//do a method in dbReader that gets this and call it
-	    	out += "nothing";
-	    }
-
 	    HashSet<Story> recommendedStories = new HashSet<Story>();
-	    if (pstories != null) {
-	    	recommendedStories.addAll(pstories);
+	    //if user has never shared, voted, or commented on anything, then recommend...
+	    if ( (pstories == null) && (vstories == null) && (cstories ==null) ) {
+	    	//for each category, get the most popular story and the stories with the highest number of comments
+	    	HashSet<Story> popstories = dr.getMostPopularStoryInEachCategory();
+	    	HashSet<Story> mostcommented = dr.getMostCommentedStoryInEachCategory();
+	    	recommendedStories = new HashSet<Story>();
+	    	if (popstories != null) {
+	    		recommendedStories.addAll(popstories);
+	    	}
+	    	if (mostcommented != null) {
+	    		recommendedStories.addAll(mostcommented);
+	    	}
+	    	//out += "nothing";
+	    } else {
+		    recommendedStories = new HashSet<Story>();
+		    if (pstories != null) {
+		    	recommendedStories.addAll(pstories);
+		    }
+		    if (vstories != null) {
+		    	recommendedStories.addAll(vstories);
+		    }
+		    if (cstories != null) {
+		    	recommendedStories.addAll(cstories);
+		    }
 	    }
-	    if (vstories != null) {
-	    	recommendedStories.addAll(vstories);
-	    }
-	    if (cstories != null) {
-	    	recommendedStories.addAll(cstories);
+	    
+	    //remove stories by this user
+	    Iterator<Story> iter = recommendedStories.iterator();
+	    while (iter.hasNext()) {
+	    	//System.out.println("checking for stories by this user..");
+	    	Story s = iter.next();
+	    	String user = s.getName();
+	    	if (user.equals(username)) {
+	    		//System.out.println("Story removed");
+	    		iter.remove();
+	    	}
 	    }
 	    
 	    ///////////////////////////////////////////
-		Iterator<Story> iter = recommendedStories.iterator();
+		iter = recommendedStories.iterator();
 		Story headline;
 		while(iter.hasNext())
 		{

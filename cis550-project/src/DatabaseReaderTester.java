@@ -18,44 +18,64 @@ public class DatabaseReaderTester {
 			System.out.println("Incorrect username or password.");
 		}
 		
-		System.out.println("Published stories:\n");
-		if ( dbr.userHasPublishedAStory("agustin") != null ) {
-			System.out.println("user has published at least one story");
-			HashSet<Story> stories = dbr.userHasPublishedAStory("agustin");
-			Iterator<Story> iter = stories.iterator();
-			System.out.println(stories.size());
-			while (iter.hasNext()) {
-				System.out.println("inside while");
-				Story story = iter.next();
-				System.out.println("Story id: " + story.getStoryid());
-			}
-			
+//		System.out.println("Published stories:\n");
+//		if ( dbr.userHasPublishedAStory("agustin") != null ) {
+//			System.out.println("user has published at least one story");
+//			HashSet<Story> stories = dbr.userHasPublishedAStory("agustin");
+//			Iterator<Story> iter = stories.iterator();
+//			System.out.println(stories.size());
+//			while (iter.hasNext()) {
+//				System.out.println("inside while");
+//				Story story = iter.next();
+//				System.out.println("Story id: " + story.getStoryid());
+//			}
+//			
+//		}
+//		
+//		System.out.println("Commented on stories:\n");
+//		if ( dbr.userHasCommentedOnAStory("agustin") != null ) {
+//			System.out.println("user has commented on at least one story");
+//			HashSet<Story> stories = dbr.userHasPublishedAStory("agustin");
+//			Iterator<Story> iter = stories.iterator();
+//			System.out.println(stories.size());
+//			while (iter.hasNext()) {
+//				System.out.println("inside while");
+//				Story story = iter.next();
+//				System.out.println("Story id: " + story.getStoryid());
+//			}
+//		}
+//		
+//		System.out.println("Voted on stories:\n");
+//		if ( dbr.userHasVotedOnAStory("agustin") != null ) {
+//			System.out.println("user has voted on at least one story");
+//			HashSet<Story> stories = dbr.userHasPublishedAStory("agustin");
+//			Iterator<Story> iter = stories.iterator();
+//			System.out.println(stories.size());
+//			while (iter.hasNext()) {
+//				System.out.println("inside while");
+//				Story story = iter.next();
+//				System.out.println("Story id: " + story.getStoryid());
+//			}
+//		}
+
+		System.out.println("Testing getMostPopularStoryInEachCategory...");
+		HashSet<Story> stories = dbr.getMostPopularStoryInEachCategory();
+		Iterator<Story> iter = stories.iterator();
+		System.out.println(stories.size());
+		while (iter.hasNext()) {
+			System.out.println("inside while");
+			Story story = iter.next();
+			System.out.println("Story id: " + story.getStoryid());
 		}
 		
-		System.out.println("Commented on stories:\n");
-		if ( dbr.userHasCommentedOnAStory("agustin") != null ) {
-			System.out.println("user has commented on at least one story");
-			HashSet<Story> stories = dbr.userHasPublishedAStory("agustin");
-			Iterator<Story> iter = stories.iterator();
-			System.out.println(stories.size());
-			while (iter.hasNext()) {
-				System.out.println("inside while");
-				Story story = iter.next();
-				System.out.println("Story id: " + story.getStoryid());
-			}
-		}
-		
-		System.out.println("Voted on stories:\n");
-		if ( dbr.userHasVotedOnAStory("agustin") != null ) {
-			System.out.println("user has voted on at least one story");
-			HashSet<Story> stories = dbr.userHasPublishedAStory("agustin");
-			Iterator<Story> iter = stories.iterator();
-			System.out.println(stories.size());
-			while (iter.hasNext()) {
-				System.out.println("inside while");
-				Story story = iter.next();
-				System.out.println("Story id: " + story.getStoryid());
-			}
+		System.out.println("Testing getMostCommentedrStoryInEachCategory...");
+		stories = dbr.getMostCommentedStoryInEachCategory();
+		iter = stories.iterator();
+		System.out.println(stories.size());
+		while (iter.hasNext()) {
+			System.out.println("inside while");
+			Story story = iter.next();
+			System.out.println("Story id: " + story.getStoryid());
 		}
 
 	}
