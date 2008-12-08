@@ -43,6 +43,11 @@ public class SearchServlet extends HttpServlet {
 		out.println("Publishing Complete");
 		out.println("</title>");
 		out.println("<body>");
+		
+		out.println("<br>");
+		out.println(PageGenerator.getMenuBar());
+		out.println("<br>");
+		
 		out.println("<b>Publishing complete</b><br><br>");
 
 		if(searchType.equals("Keyword")){
@@ -84,7 +89,7 @@ public class SearchServlet extends HttpServlet {
 			out += ("Category: \"" + headline.getCategory() + "\". <br>");
 			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
 			out += ("Submitted by: \"" + headline.getName() + "\". <br>");
-			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
+			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() +  "\">Details...</a> <br><br><br>");
 
 		}
 		////////////////////////////////////////////
@@ -114,7 +119,7 @@ public class SearchServlet extends HttpServlet {
 				out += ("Category: \"" + headline.getCategory() + "\". <br>");
 				out += ("Private? \"" + headline.getPrivate() + "\". <br>");
 				out += ("Submitted by: \"" + headline.getName() + "\". <br>");
-				out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
+				out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() +  "\">Details...</a> <br><br><br>");
 			}
 			
 		}
@@ -139,7 +144,7 @@ public class SearchServlet extends HttpServlet {
 			out += ("Category: \"" + headline.getCategory() + "\". <br>");
 			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
 			out += ("Submitted by: \"" + headline.getName() + "\". <br>");
-			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
+			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() +  "\">Details...</a> <br><br><br>");
 		}
 		
 		return out;
@@ -162,7 +167,7 @@ public class SearchServlet extends HttpServlet {
 			out += ("Category: \"" + headline.getCategory() + "\". <br>");
 			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
 			out += ("Submitted by: \"" + headline.getName() + "\". <br>");
-			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
+			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() +  "\">Details...</a> <br><br><br>");
 		}
 		
 		return out;
