@@ -407,7 +407,7 @@ public class DatabaseReader {
 			pstmt.setString(1, name);
 
 			if(pending == true){
-				pstmt.setInt(2, 1);
+				pstmt.setInt(2, 2);
 			}else{
 				pstmt.setInt(2, 0);
 			}
