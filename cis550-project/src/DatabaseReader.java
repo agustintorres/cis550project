@@ -382,9 +382,7 @@ public class DatabaseReader {
                         PreparedStatement pstmt;
                        
                        
-                        pstmt = conn.prepareStatement("SELECT uid1 FROM FRIENDS WHERE uid2 = ? AND pending = ?"
-                                                                                                                                        +" AND pending = ?");
-                       
+                        pstmt = conn.prepareStatement("SELECT uid1 FROM FRIENDS WHERE uid2 = ? AND pending = ?");                                                                                                                                  
                        
                         pstmt.setString(1, name);
                        
@@ -400,8 +398,8 @@ public class DatabaseReader {
                                 names.add(rs.getString(1));
                         }
                        
-                        pstmt = conn.prepareStatement("SELECT uid2 FROM FRIENDS WHERE uid1 = ? AND pending = ?"
-                                                                                                                                +" AND pending = ?");
+                        pstmt = conn.prepareStatement("SELECT uid2 FROM FRIENDS WHERE uid1 = ? AND pending = ?");
+                                                                                                               
                        
                         pstmt.setString(1, name);
                        
