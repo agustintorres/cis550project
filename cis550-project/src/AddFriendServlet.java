@@ -22,9 +22,12 @@ public class AddFriendServlet extends HttpServlet
         PrintWriter out = resp.getWriter();
 
         out.println("<html>");
+        out.println("<head>");
         out.println("<title>");
-        out.println("Friend Added");
+        out.println("Friend Added Successfully");
         out.println("</title>");
+        out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project\">");
+        out.println("</head>");
         out.println("<body>");
         out.println("<b>Friend added successfully</b><br><br>");
         out.println("You added " + uid2 + " as a friend. Hopefully he/she will accept.");

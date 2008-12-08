@@ -37,22 +37,40 @@ public class ViewFriendServlet extends HttpServlet{
 		PrintWriter out = resp.getWriter();
 
 		out.println("<html>");
+		out.println("<head>");
 		out.println("<title>");
 		out.println("Your Friends");
 		out.println("</title>");
+		
+		String username = "notloggedin";
+		boolean loggedin = false;
+		if(session.isNew() || session.getAttribute("username") == null) {
+			//not logged in, redirect
+			out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project/login.html\">");
+		} else {
+			//dont redirect (ie dont do anything)
+			loggedin = true;
+		}
+		
+		out.println("</head>");
 		out.println("<body>");
-		out.println(PageGenerator.getMenuBar());
-		out.println("<b>Your Friends</b><br><br>");
-		out.println(getText(uid1, false));
-		DatabaseReader dr = new DatabaseReader();
-		if(dr.getFriendsByName(uid1, true) != null){
-			out.println("<b>Pending Friends</b><br><br>");
-			out.println(getText(uid1, true));
+		
+		if (!loggedin) {
+			out.println("<p>Please log in so that you can view your friends.</p>");
+			out.println("<p>You will now be redirected to the login page.</p>");
+		} else {
+			out.println(PageGenerator.getMenuBar());
+			out.println("<b>Your Friends</b><br><br>");
+			out.println(getText(uid1, false));
+			DatabaseReader dr = new DatabaseReader();
+			if(dr.getFriendsByName(uid1, true) != null){
+				out.println("<b>Pending Friends</b><br><br>");
+				out.println(getText(uid1, true));
+			}
 		}
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
-
 
 	}
 	

@@ -131,6 +131,10 @@ insert into CATEGORIES values ('News');
 insert into CATEGORIES values ('Politics');
 insert into CATEGORIES values ('Sports');
 insert into CATEGORIES values ('Technology');
+insert into CATEGORIES values ('Science');
+insert into CATEGORIES values ('Lifestyle');
+insert into CATEGORIES values ('Entertainment');
+insert into CATEGORIES values ('Business');
 
 
 
