@@ -1072,7 +1072,7 @@ public class DatabaseReader {
 			Comment tempComment;
 			Connection conn = getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT c.text, c.uid, c.commenttime, s.title, s.url FROM COMMENTS c, STORIES s WHERE s.storyid = c.storyid AND c.uid="+uid);
+			ResultSet rs = stmt.executeQuery("SELECT c.text, c.uid, c.commenttime, s.title, s.url FROM COMMENTS c, STORIES s WHERE s.storyid = c.storyid AND c.uid=\""+uid +"\"");
 			while(rs.next()){
 				tempComment = new Comment();
 				
@@ -1109,7 +1109,7 @@ public class DatabaseReader {
 			Story tempStory;
 			Connection conn = getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT s.* FROM VOTES v, STORIES s WHERE uid=" + uid + " AND s.storyid = v.storyid");
+			ResultSet rs = stmt.executeQuery("SELECT s.* FROM VOTES v, STORIES s WHERE uid=\"" + uid + "\" AND s.storyid = v.storyid");
 			while(rs.next()){
 				tempStory = new Story();
 				// retrieve and print the values for the current row
@@ -1248,7 +1248,7 @@ public class DatabaseReader {
 			Statement stmt = conn.createStatement();
 			ResultSet rs;
 			String myQuery = "";
-			myQuery = ("SELECT * FROM STORIES WHERE name = " + username);
+			myQuery = ("SELECT * FROM STORIES WHERE name = \"" + username + "\"");
 				
 			rs = stmt.executeQuery(myQuery);
 				
