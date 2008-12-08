@@ -34,9 +34,9 @@
 \s15\ql \li720\ri0\sa200\sl276\slmult1\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin720\itap0\contextualspace \rtlch\fcs1 \af31507\afs22\alang1025 \ltrch\fcs0 \f31506\fs22\lang1033\langfe1033\cgrid\langnp1033\langfenp1033 
 \sbasedon0 \snext15 \sqformat \spriority34 \styrsid14173698 List Paragraph;}}{\*\pgptbl {\pgp\ipgp4\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp4\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp7\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp0\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp7\itap0\li0\ri0\sb0
 \sa0}{\pgp\ipgp4\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp0\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp4\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp7\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp7\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp7\itap0\li0\ri0\sb0\sa0}{\pgp\ipgp4\itap0\li0\ri0\sb0\sa0}}
-{\*\rsidtbl \rsid1274219\rsid2061755\rsid4067806\rsid8415025\rsid9319138\rsid12725697\rsid14173698\rsid15490035}{\mmathPr\mmathFont34\mbrkBin0\mbrkBinSub0\msmallFrac0\mdispDef1\mlMargin0\mrMargin0\mdefJc1\mwrapIndent1440\mintLim0\mnaryLim1}{\info
-{\author Matthew Evans}{\operator Matthew Evans}{\creatim\yr2008\mo12\dy7\hr21\min42}{\revtim\yr2008\mo12\dy7\hr22\min40}{\version7}{\edmins36}{\nofpages3}{\nofwords455}{\nofchars2297}{\*\company University of Pennsylvania}{\nofcharsws2747}{\vern32895}}
-{\*\xmlnstbl {\xmlns1 http://schemas.microsoft.com/office/word/2003/wordml}}\paperw12240\paperh15840\margl1440\margr1440\margt1440\margb1440\gutter0\ltrsect 
+{\*\rsidtbl \rsid1274219\rsid2061755\rsid4067806\rsid8327832\rsid8415025\rsid9319138\rsid12725697\rsid14173698\rsid15490035}{\mmathPr\mmathFont34\mbrkBin0\mbrkBinSub0\msmallFrac0\mdispDef1\mlMargin0\mrMargin0\mdefJc1\mwrapIndent1440\mintLim0\mnaryLim1}
+{\info{\author Matthew Evans}{\operator Matthew Evans}{\creatim\yr2008\mo12\dy7\hr21\min42}{\revtim\yr2008\mo12\dy8\hr10\min58}{\version8}{\edmins37}{\nofpages7}{\nofwords1410}{\nofchars9585}{\*\company University of Pennsylvania}{\nofcharsws10974}
+{\vern32895}}{\*\xmlnstbl {\xmlns1 http://schemas.microsoft.com/office/word/2003/wordml}}\paperw12240\paperh15840\margl1440\margr1440\margt1440\margb1440\gutter0\ltrsect 
 \widowctrl\ftnbj\aenddoc\trackmoves1\trackformatting1\donotembedsysfont1\relyonvml0\donotembedlingdata0\grfdocevents0\validatexml1\showplaceholdtext0\ignoremixedcontent0\saveinvalidxml0\showxmlerrors1\noxlattoyen
 \expshrtn\noultrlspc\dntblnsbdb\nospaceforul\formshade\horzdoc\dgmargin\dghspace180\dgvspace180\dghorigin1440\dgvorigin1440\dghshow1\dgvshow1
 \jexpand\viewkind1\viewscale110\pgbrdrhead\pgbrdrfoot\splytwnine\ftnlytwnine\htmautsp\nolnhtadjtbl\useltbaln\alntblind\lytcalctblwd\lyttblrtgr\lnbrkrule\nobrkwrptbl\snaptogridincell\allowfieldendsel\wrppunct
@@ -69,20 +69,234 @@ each of the functionality pages. Generally speaking, the following functions are
 \par A dead link cleaner that removes no longer accessible stories.
 \par }{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid14173698 Searching based upon keyword, categories, popular, and recent stories.
 \par }\pard \ltrpar\ql \fi720\li0\ri0\sl480\slmult1\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid2061755 {\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid1274219 
-\par }{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid2061755\charrsid2061755 
-The inverted index is implemented using the INVINDEX table in the database. Every time a story is added to the database, the title and description are parsed. These parsed words are then added one-by-one to the INVINDEX table along with the storyId of the
- story. 
-\par Now, when the user wants to do a search, the search processor first parses the search string into individual terms. Then, it finds storyIds that match each search term. Finally, the search processor does an intersect across the matching storyIds for each 
-search term. The storyIds that match every search term are the proper results. The matching story for each storyId is then returned.
-\par For extra credit, we implemented the ability to see users that have a history of sharing good content. This is determined by
- the ratio of votes to stories for every user. The top three users and their ratios are displayed at the bottom of the front page of the site. }{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid9319138 
+\par }{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid2061755\charrsid2061755 The inverted index is implemented using th
+e INVINDEX table in the database. Every time a story is added to the database, the title and description are parsed. These parsed words are then added one-by-one to the INVINDEX table along with the storyId of the story. 
+\par Now, when the user wants to do a s
+earch, the search processor first parses the search string into individual terms. Then, it finds storyIds that match each search term. Finally, the search processor does an intersect across the matching storyIds for each search term. The storyIds that mat
+ch every search term are the proper results. The matching story for each storyId is then returned.
+\par For extra credit, we implemented the ability to see users that have a history of sharing good content. This is determined by the ratio of votes to stories for
+ every user. The top three users and their ratios are displayed at the bottom of the front page of the site. }{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid9319138 
 \par }\pard \ltrpar\ql \li0\ri0\sl480\slmult1\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8415025 {\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid8415025\charrsid8415025 We feel we worked very well as a team and everyon
-}{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid8415025 e did an equal amount of work. Everyone got to work on all functionality at some point in the process (design, implementation, testing, debugging). We all learned quite a bit about Jav
-a web apps and MySQL databases.
+}{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid8415025 e did an equal amount of work. Everyone got to work on all functionality at some point in the pro
+cess (design, implementation, testing, debugging). We all learned quite a bit about Java web apps and MySQL databases.
 \par }\pard \ltrpar\ql \fi720\li0\ri0\sl480\slmult1\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8415025 {\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid8415025 Here is a specific breakdown:}{\rtlch\fcs1 \af0\afs24 
 \ltrch\fcs0 \f0\fs24\insrsid8415025\charrsid8415025 \line Andrew:\line -Searc}{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \f0\fs24\insrsid8415025 h\line -Inverted Index\line -View Friends}{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 
 \f0\fs24\insrsid8415025\charrsid8415025 \line Matt:\line -RSS Feed\line -Votes and Comments\line -Crawler\line Agustin:\line -Recommendations\line -Sessions (log in / log out)\line -User registration / add friends}{\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 
-\f0\fs24\insrsid8415025\charrsid9319138 
+\f0\fs24\insrsid8415025 
+\par }\pard \ltrpar\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8327832 {\rtlch\fcs1 \af0\afs20 \ltrch\fcs0 \b\f0\fs20\insrsid8327832\charrsid8327832 Schema:
+\par }{\rtlch\fcs1 \af0\afs20 \ltrch\fcs0 \b\f0\fs20\insrsid8327832\charrsid8327832 drop table USERS;
+\par drop table FRIENDS;
+\par drop table STORIES;
+\par drop table CATEGORIES;
+\par drop table POSTS;
+\par drop table COMMENTS;
+\par drop table PARENTOF;
+\par drop table VOTES;
+\par drop table INVINDEX;
+\par 
+\par 
+\par create table USERS 
+\par ( 
+\par    name VARCHAR(20) PRIMARY KEY,
+\par    password VARCHAR(20) NOT NULL, 
+\par    dob DATE NULL, 
+\par    location VARCHAR(50) NULL, 
+\par    profession VARCHAR(50) NULL 
+\par ); 
+\par   
+\par create table FRIENDS 
+\par ( 
+\par \tab pending INTEGER NOT NULL,
+\par     uid1 VARCHAR(20) references USERS(name), 
+\par     uid2 VARCHAR(20) references USERS(name), 
+\par     primary key (uid1, uid2) 
+\par      
+\par );
+\par 
+\par CREATE TABLE STORIES 
+\par ( 
+\par     url VARCHAR(255) NOT NULL, 
+\par \tab storyid INTEGER PRIMARY KEY AUTO_INCREMENT,
+\par \tab name VARCHAR(20) NOT NULL,
+\par     title VARCHAR(255) NOT NULL, 
+\par     private INTEGER NOT NULL, 
+\par     description VARCHAR(2000) NULL, 
+\par     storytime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  
+\par     votes INTEGER NOT NULL, 
+\par \tab category VARCHAR(50) NOT NULL,
+\par \tab foreign key (name) references USERS(name),
+\par \tab foreign key (Category) references CATEGORIES(category)
+\par );
+\par 
+\par CREATE TABLE CATEGORIES
+\par (
+\par \tab Category VARCHAR(50) PRIMARY KEY
+\par );
+\par  
+\par 
+\par 
+\par CREATE TABLE POSTS
+\par (
+\par \tab cid INTEGER NOT NULL,
+\par \tab uid INTEGER NOT NULL,
+\par \tab url VARCHAR(255) NOT NULL,
+\par \tab PRIMARY KEY (cid, uid, url),
+\par \tab FOREIGN KEY (cid) REFERENCES COMMENTS,
+\par \tab FOREIGN KEY (uid) REFERENCES USERS,
+\par \tab FOREIGN KEY (url) REFERENCES STORIES
+\par 
+\par );
+\par   
+\par CREATE TABLE COMMENTS
+\par 
+\par (     
+\par \tab cid INTEGER AUTO_INCREMENT PRIMARY KEY,
+\par \tab uid VARCHAR(20) NOT NULL,
+\par    \tab storyid INTEGER NOT NULL,    
+\par \tab text VARCHAR(2000) NOT NULL,
+\par     parent INTEGER,    
+\par \tab commenttime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    
+\par \tab FOREIGN KEY (parent) REFERENCES COMMENTS(cid) ,
+\par \tab FOREIGN KEY (uid) REFERENCES USERS(name),
+\par     FOREIGN KEY(storyid) REFERENCES STORIES(storyid)
+\par 
+\par );
+\par 
+\par create table PARENTOF 
+\par ( 
+\par     cidself INTEGER PRIMARY KEY, 
+\par     cidparent INTEGER NOT NULL,
+\par     foreign key (cidself) references COMMENTS(cid),
+\par     foreign key (cidparent) references COMMENTS(cid) 
+\par ); 
+\par 
+\par create table VOTES
+\par (
+\par     uid VARCHAR(20) NOT NULL, 
+\par \tab storyid INTEGER NOT NULL,
+\par \tab foreign key (uid) references USERS(name), 
+\par \tab foreign key (storyid) references STORIES(storyid), 
+\par \tab primary key(uid, storyid)
+\par );
+\par 
+\par create table INVINDEX
+\par (
+\par \tab indid INTEGER AUTO_INCREMENT PRIMARY KEY,
+\par \tab word VARCHAR(255) NOT NULL,
+\par \tab docid INTEGER NOT NULL,
+\par \tab foreign key (docid) references STORIES(storyid)
+\par );
+\par 
+\par 
+\par 
+\par /********************************************************************/
+\par /********************************************************************/
+\par /********************************************************************/
+\par /********************************************************************/
+\par 
+\par 
+\par /* Users */
+\par 
+\par insert into USERS values ('agustin','databases', '1987-07-21', 'Mexico', 'Student');
+\par insert into USERS values ('mattwonder','databases', '1987-08-12', 'Philadelphia', 'Student');
+\par insert into USERS values ('andrewcc','databases', '1987-04-01', 'Philadelphia', 'Student');
+\par insert into USERS values ('coder','coder', '1960-07-21', 'New York', 'Coder');
+\par insert into USERS values ('rms','rms', '1967-07-21', 'Massachusetts', 'Hacker');
+\par insert into USERS values ('esr','esr', '1979-07-21', 'Philadelphia', 'Hacker');
+\par insert into USERS values ('bliskov','bliskov', '1943-07-21', 'Texas', 'Professor');
+\par insert into USERS values ('johndoe','johndoe', '1930-07-21', 'Cambridge, MA', 'Secret Agent');
+\par insert into USERS values ('ana','ana', '1988-07-21', 'New Jersey', 'Model');
+\par insert into USERS values ('ramakrishnan','ramakrishnan', '1979-07-21', 'Wisconsin', 'Professor');
+\par 
+\par 
+\par 
+\par /* Categories */
+\par 
+\par insert into CATEGORIES values ('Misc');
+\par insert into CATEGORIES values ('News');
+\par insert into CATEGORIES values ('Politics');
+\par insert into CATEGORIES values ('Sports');
+\par insert into CATEGORIES values ('Technology');
+\par insert into CATEGORIES values ('Science');
+\par insert into CATEGORIES values ('Lifestyle');
+\par insert into CATEGORIES values ('Entertainment');
+\par insert into CATEGORIES values ('Business');
+\par 
+\par 
+\par 
+\par /* Stories */
+\par insert into STORIES values ('http://www.complex.com/blogs/2008/12/01/the-5-most-infamous-self-inflicted-athelete-injuries/',
+\par                             1, 'agustin', 'The 5 Most Infamous Self-Inflicted Athelete Injuries', 
+\par                             0, 'By now, youve probably heard all about New York Giants wide receive
+r Plaxico Burress wild Thanksgiving weekend. But is it the worst off-field, self-inflicted (and non-lethal, word to our already iffy sports injury karma) injury in sports history? Read on to see our top 5...',
+\par                             '2008-12-1', 132, 'Sports');
+\par insert into STORIES values ('http://www.treehugger.com/files/2008/12/worlds-fastest-electric-superbike-125mph.php',
+\par                             2, 'mattwonder', 'Worlds Fastest Electric Superbike: 125 MPH and No Carbon Emis', 
+\par                             1, 'If you live in the United States, you may have missed the announcement made last Thursday, that the world \'e2\'80\'99
+s fastest all-electric superbike has been unveiled. Making its first appearance at the 2008 NEC Bike Show in the UK , the TTX01 isn\'e2\'80\'99t commercially available yet.',
+\par                             '2008-11-29', 5, 'Sports');
+\par insert into STORIES values ('http://arstechnica.com/journals/apple.ars/2008/12/01/apple-offers-free-licensing-for-mini-displayport-spec',
+\par                             3, 'andrewcc', 'Apple offers free licensing for Mini DisplayPort spec', 
+\par                             0, 'When Apple recently introduced its revamped notebook line, it also introduced the world to the Mini DisplayPort. It turns o
+ut that the company is offering no-fee licenses to anyone interested in developing products that use the Mini DisplayPort specification.',
+\par                             '2008-11-28', 54, 'Technology');
+\par insert into STORIES values ('http://www.askmen.com/top_10/sports/top-5-sports-changes-we-want-to-see-obama-make_5.html',
+\par                             4, 'esr', 'Top 5: Sports Changes We Want To See Obama Make', 
+\par                             1, 'From the Olympics to the NCAA, Im fairly certain Obama has more pull in certain arenas, but its fun to hope.',
+\par                             '2005-01-03', 0, 'Politics');
+\par insert into STORIES values ('http://home.howstuffworks.com/dangerous-home-products.htm',
+\par                             5, 'mattwonder', '10 Dangerous Everyday Things in Your Home', 
+\par                             0, 'Either by accident or faulty manufacturing, household consumer products injure an estimated 33.1 million people in the United States every year. Where are these toxins coming from and what can we do a
+bout it? Read on to learn about 10 of the most common products that people are starting to think twice about bringing into their houses.',
+\par                             '2002-08-11', 54, 'Misc');
+\par 
+\par 
+\par /* Votes */
+\par 
+\par insert into VOTES values ('agustin', 1);
+\par insert into VOTES values ('agustin', 2);
+\par insert into VOTES values ('agustin', 5);
+\par insert into VOTES values ('mattwonder', 2);
+\par insert into VOTES values ('mattwonder', 4);
+\par insert into VOTES values ('mattwonder', 5);
+\par insert into VOTES values ('mattwonder', 3);
+\par insert into VOTES values ('andrewcc', 3);
+\par insert into VOTES values ('andrewcc', 4);
+\par insert into VOTES values ('ana', 4);
+\par insert into VOTES values ('esr', 4);
+\par insert into VOTES values ('esr', 2);
+\par 
+\par 
+\par 
+\par /* Comments */
+\par insert into COMMENTS values (1, 'agustin', 1, 'This story sucks.', 1, '2008-12-1 1:15');
+\par insert into COMMENTS values (2, 'andrewcc', 1, 'I agree. This story sucks.', 1, '2008-12-1 2:00');
+\par insert into COMMENTS values (3, 'mattwonder', 1, 'I disagree. The story rocks!', 2, '2008-12-1 3:40');
+\par insert into COMMENTS values (4, 'ana', 1, 'Cool stuff.', 1, '2008-12-1 17:50');
+\par insert into COMMENTS values (5, 'esr', 1, 'Everyones should read this!.', 1, '2008-12-1');
+\par 
+\par 
+\par 
+\par /* Friends */
+\par 
+\par insert into FRIENDS values (1, 'agustin', 'mattwonder');
+\par insert into FRIENDS values (1, 'agustin', 'andrewcc');
+\par insert into FRIENDS values (1, 'mattwonder', 'andrewcc');
+\par insert into FRIENDS values (1, 'esr', 'ana');
+\par insert into FRIENDS values (1, 'ana', 'esr');
+\par insert into FRIENDS values (1, 'johndoe', 'agustin');
+\par insert into FRIENDS values (1, 'rms', 'esr');
+\par insert into FRIENDS values (0, 'coder', 'andrewcc');
+\par insert into FRIENDS values (0, 'coder', 'mattwonder');
+\par insert into FRIENDS values (0, 'coder', 'agustin');
+\par 
+\par 
+\par /* InvIndex */
+\par 
+\par 
+\par 
+\par /* Posts */
+\par }\pard \ltrpar\ql \li0\ri0\sl480\slmult1\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0\pararsid8327832 {\rtlch\fcs1 \af0\afs24 \ltrch\fcs0 \b\f0\fs24\insrsid8327832\charrsid8327832 
 \par }{\*\themedata 504b030414000600080000002100828abc13fa0000001c020000130000005b436f6e74656e745f54797065735d2e786d6cac91cb6ac3301045f785fe83d0b6d8
 72ba28a5d8cea249777d2cd20f18e4b12d6a8f843409c9df77ecb850ba082d74231062ce997b55ae8fe3a00e1893f354e9555e6885647de3a8abf4fbee29bbd7
 2a3150038327acf409935ed7d757e5ee14302999a654e99e393c18936c8f23a4dc072479697d1c81e51a3b13c07e4087e6b628ee8cf5c4489cf1c4d075f92a0b
@@ -188,8 +402,8 @@ fffffffffffffffffdfffffffeffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-ffffffffffffffffffffffffffffffff52006f006f007400200045006e00740072007900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016000500ffffffffffffffffffffffffec69d9888b8b3d4c859eaf6cd158be0f000000000000000000000000a030
-e8bee658c901feffffff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000
+ffffffffffffffffffffffffffffffff52006f006f007400200045006e00740072007900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016000500ffffffffffffffffffffffffec69d9888b8b3d4c859eaf6cd158be0f00000000000000000000000090d1
+a2d94d59c901feffffff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000
 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffff000000000000000000000000000000000000000000000000
 0000000000000000000000000000000000000000000000000105000000000000}}
