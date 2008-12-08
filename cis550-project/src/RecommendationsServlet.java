@@ -43,11 +43,11 @@ public class RecommendationsServlet extends HttpServlet {
 		out.println(PageGenerator.getMenuBar());
 		out.println("<br>");
 		
-		out.println("<form method=\"POST\" action=\"SearchServlet\"/>" +
-				"Search: <input name=\"searchText\" type=\"text\" /> <br>" +
-				"<input type=\"submit\" value=\"Submit\" />" +
-				"</form>" +
-				"<br><br>");
+		//out.println("<form method=\"POST\" action=\"SearchServlet\"/>" +
+				//"Search: <input name=\"searchText\" type=\"text\" /> <br>" +
+				//"<input type=\"submit\" value=\"Submit\" />" +
+				//"</form>" +
+				//"<br><br>");
 		
 		
 		//if(dr.getRecommendations("agustin") != null){

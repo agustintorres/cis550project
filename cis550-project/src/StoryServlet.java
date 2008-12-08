@@ -36,16 +36,19 @@ public class StoryServlet extends HttpServlet {
 
 		out.println("<html>");
 		out.println("<title>");
+		out.println("<head>");
 		out.println("Publishing Complete");
 		out.println("</title>");
+		out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project\">");
+		out.println("</head>");
 		out.println("<body>");
-		out.println("<b>Publishing complete</b><br><br>");
-		out.println("The paramter title was \"" + title + "\".");
-		out.println("The paramter url was \"" + url + "\".");
-		out.println("The paramter description was \"" + description + "\".");
-		out.println("The paramter category was \"" + category + "\".");
-		out.println("The paramter private was \"" + isprivate + "\".");
-		out.println("The paramter name was \"" + name + "\".");
+		out.println("<b>Your story was published successfully</b><br><br>");
+		//out.println("The paramter title was \"" + title + "\".");
+		//out.println("The paramter url was \"" + url + "\".");
+		//out.println("The paramter description was \"" + description + "\".");
+		//out.println("The paramter category was \"" + category + "\".");
+		//out.println("The paramter private was \"" + isprivate + "\".");
+		//out.println("The paramter name was \"" + name + "\".");
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
