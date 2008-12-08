@@ -26,9 +26,9 @@ public class XmlGenerator extends HttpServlet {
 		if(session.isNew() || session.getAttribute("username") == null) {
 			theUser = "";
 		}
-		
+		else{
 		theUser =  (String) session.getAttribute("username");
-
+		}
 		
 		PrintWriter out = resp.getWriter();
 		out.println("<?xml version=\"1.0\"?>");
