@@ -75,6 +75,12 @@ public class SearchServlet extends HttpServlet {
 	public static String getKeywordSearch(LinkedList<String> words, String username, int i){
 
 		String out = "";
+		
+		if(words.size() == 0){
+			out+= "You must give a keyword.";
+			return out;
+		}else{
+		
 		SearchInvertedIndex sii = new SearchInvertedIndex(words);
 		LinkedList<Story> newspaper = sii.createRanking();
 
@@ -95,6 +101,7 @@ public class SearchServlet extends HttpServlet {
 		////////////////////////////////////////////
 
 		return out;
+		}
 
 	}
 	
