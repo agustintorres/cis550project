@@ -2,11 +2,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class XmlGenerator extends HttpServlet {
@@ -19,31 +21,15 @@ public class XmlGenerator extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException
 	{
-		String theUser = req.getParameter("uid");
-		//get user's most recent stories, comments, votes
+		HttpSession session = req.getSession();
+		String theUser;
+		if(session.isNew() || session.getAttribute("username") == null) {
+			theUser = "";
+		}
 		
-		//stories posted by that user
-		//SELECT * FROM STORIES where name='mattwonder';
-		
-		
-		//comments posted by that user
-		//SELECT * FROM COMMENTS WHERE uid='mattwonder';
-		/*
-		 * need:
-		 * username
-		 * comment text
-		 * comment time
-		 * on story
-		 */
-		
-		//votes made by that user
-		//SELECT * FROM VOTES WHERE uid='mattwonder';
-		/* need:
-		 * username
-		 * time
-		 * story
-		 */
+		theUser =  (String) session.getAttribute("username");
 
+		
 		PrintWriter out = resp.getWriter();
 		out.println("<?xml version=\"1.0\"?>");
 		out.println("<rss version=\"2.0\">");
@@ -94,9 +80,15 @@ public class XmlGenerator extends HttpServlet {
 		      <guid>http://liftoff.msfc.nasa.gov/2003/05/20.html#item570</guid>
 		    </item>
 		    */
-		//out.println(ViewStories.getXml(10));
-		out.println(getAllXml(theUser));
-		
+		if (theUser.equals("")){
+			out.println("");
+		}else{
+			DatabaseReader theReader = new DatabaseReader();
+			Iterator<User> iter = theReader.getFriendsByName(theUser, false).iterator();
+			while(iter.hasNext()){					
+				out.println(getAllXml(iter.next().getUsername()));
+			}
+		}
 		out.println("</channel>");
 		out.println("</rss>");
 		out.flush();
@@ -146,7 +138,7 @@ public class XmlGenerator extends HttpServlet {
 		///////////////////////////////////////////
 		Iterator<Comment> iterc = complaints.iterator();
 		Comment quip;
-		while(iter.hasNext())
+		while(iterc.hasNext())
 		{
 			quip = iterc.next();
 			out += ("<item> \n");
