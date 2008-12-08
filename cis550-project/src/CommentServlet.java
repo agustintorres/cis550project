@@ -20,7 +20,14 @@ public class CommentServlet extends HttpServlet {
 	{
 		
 		String commentText = req.getParameter("commenttext");
-		String username = req.getParameter("uid");
+		HttpSession session = req.getSession();
+		String theUser;
+		if(session.isNew() || session.getAttribute("username") == null) {
+			theUser = "";
+		}
+		else{
+		theUser =  (String) session.getAttribute("username");
+		}
 		int storyid = Integer.parseInt(req.getParameter("sid"));
 		
 		//Add comment to database
@@ -33,7 +40,7 @@ public class CommentServlet extends HttpServlet {
 		
 		DatabaseRecorder dbrec = new DatabaseRecorder();
 		
-		boolean status = dbrec.recordComment(storyid, username, commentText);
+		boolean status = dbrec.recordComment(storyid, theUser, commentText);
 		
 		
 		//Reload the detail page
@@ -46,7 +53,7 @@ public class CommentServlet extends HttpServlet {
 		out.println("<title>");
 		out.println("Commenting Complete");
 		out.println("</title>");
-		out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project/detail?sid=" + storyid + "&uid=" + username + "\">");
+		out.println("<meta http-equiv=\"REFRESH\" content=\"3; url=/cis550-project/detail?sid=" + storyid +  "\">");
 		out.println("</head>");
 		out.println("<body>");
 		if (status){

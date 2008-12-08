@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @SuppressWarnings("serial")
@@ -20,7 +21,16 @@ public class DetailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	throws ServletException, IOException
 	{
-		String theUser = req.getParameter("uid");
+		HttpSession session = req.getSession();
+		String theUser;
+		if(session.isNew() || session.getAttribute("username") == null) {
+			theUser = "";
+		}
+		else{
+		theUser =  (String) session.getAttribute("username");
+		}
+		
+		//String theUser = req.getParameter("uid");
 		int theStory = Integer.parseInt(req.getParameter("sid"));
 
 		PrintWriter out = resp.getWriter();
@@ -30,7 +40,7 @@ public class DetailServlet extends HttpServlet {
 		out.println("Story Detail");
 		out.println("</title>");
 		out.println("<body>");
-		if(theUser.equals("notloggedin")){
+		if(theUser.equals("")){
 		out.println("<br> <h1> <b> YOU ARE NOT LOGGED IN. YOU CANNOT DO ANYTHING </b> </h1> <br>");
 		}
 		out.println("<form method=\"POST\" action=\"SearchServlet\"/>" +
@@ -55,12 +65,8 @@ public class DetailServlet extends HttpServlet {
 		out.println("Votes: \"" + headline.getVotes() + "\". <br><br><br>");
 		
 		//give vote option
-		if(!(theUser.equals("notloggedin"))){		
-		out.println("<a href=\"/cis550-project/vote?sid=" + theStory + "&uid="+ theUser +"\">Vote!</a>");
-		
-		//old-style commenting:
-		//out.println("<a href=\"/cis550-project/comment?sid=" + theStory + "&uid="+ theUser + "&commenttext=blahblahcomment" + "\">Comment!</a>");
-		
+		if(!(theUser.equals(""))){		
+		out.println("<a href=\"/cis550-project/vote?sid=" + theStory + "\">Vote!</a>");		
 		}
 		
 		//list all other comments
@@ -78,8 +84,7 @@ public class DetailServlet extends HttpServlet {
 			out.println("No comments found. <br><br>");
 		}
 		//give comment option
-		
-		//needs sid and uid
+		if(!(theUser.equals(""))){	
 		out.println("<br><br>");
 		out.println("<form method=\"POST\" action=\"comment\"/>" +
 				"Comment: <input name=\"commenttext\" type=\"text\" /> <br>" +
@@ -88,6 +93,7 @@ public class DetailServlet extends HttpServlet {
 				"<input type=\"submit\" value=\"Submit\" />" +
 				"</form>" +
 				"<br><br>");
+		}
 		
 
 		

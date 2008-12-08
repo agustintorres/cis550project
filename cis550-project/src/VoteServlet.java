@@ -26,8 +26,15 @@ public class VoteServlet extends HttpServlet {
 		String status = "";
 		
 		//Get params for storyid and userid
+		HttpSession session = req.getSession();
+		String theUser;
+		if(session.isNew() || session.getAttribute("username") == null) {
+			theUser = "";
+		}
+		else{
+		theUser =  (String) session.getAttribute("username");
+		}
 		
-		String theUser = req.getParameter("uid");
 		int theStory = Integer.parseInt(req.getParameter("sid"));
 		
 		//Query the votes table to see if tuple exists for storyid and userid
