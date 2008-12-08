@@ -58,46 +58,9 @@ public class DatabaseReader {
 	}
 
 	public Story getStoryById(int id){
-			//use JDBC to insert this user into the database
-			try {
-
-				// connect to the database
-				Connection conn = getConnection();
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM STORIES WHERE storyid = " + id);
-				rs.next();
-				Story tempStory = new Story();
-				// retrieve and print the values for the current row
-				String myurl = rs.getString("url");
-				String mytitle = rs.getString("title");
-				String myname = rs.getString("name");
-				int myprivate = rs.getInt("private");
-				String mydescription = rs.getString("description");
-				String mystorytime = rs.getString("storytime");
-				//int myvotes = rs.getInt("votes");
-				int myvotes = getVotesByStory(rs.getInt("storyid"));
-				String mycategory = rs.getString("category");
-
-				tempStory.setTitle(mytitle);
-				tempStory.setName(myname);
-				tempStory.setDescription(mydescription);
-				tempStory.setURL(myurl);
-				tempStory.setCategory(mycategory);
-				tempStory.setPrivate(myprivate);
-				tempStory.setVotes(myvotes);
-
-
-				System.out.println("query was executed successfully!");
-
-				// close statement, connection, and output stream
-				stmt.close();
-				conn.close();
-				return tempStory;
-			} catch (java.lang.Exception ex) {
-
-				ex.printStackTrace();
-				return null;
-			}
+		ArrayList<Story> myStory = getStories(0, id, 0);
+		Story outStory = myStory.get(0);
+		return outStory;
 	}
 
 	public ArrayList<CrawlerLink> getLinks(){
