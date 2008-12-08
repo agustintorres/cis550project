@@ -57,6 +57,10 @@ public class SearchServlet extends HttpServlet {
 			out.println(getRecentSearch(words, name, 10));
 		}
 		
+		if(searchType.equals("Most Popular")){
+			out.println(getPopularSearch(words, name, 10));
+		}
+		
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
@@ -124,6 +128,29 @@ public class SearchServlet extends HttpServlet {
 		DatabaseReader dr = new DatabaseReader();
 		
 		LinkedList<Story> newspaper = dr.getStoriesByRecent();
+		
+		Iterator<Story> iter = newspaper.iterator();
+		Story headline;
+		while(iter.hasNext())
+		{
+			headline = iter.next();
+			out += ("<a href=\"" + headline.getURL() + "\">" + headline.getTitle() + "</a> . <br>");
+			out += ("Description: \"" + headline.getDescription() + "\". <br>");
+			out += ("Category: \"" + headline.getCategory() + "\". <br>");
+			out += ("Private? \"" + headline.getPrivate() + "\". <br>");
+			out += ("Submitted by: \"" + headline.getName() + "\". <br>");
+			out += ("<a href=\"/cis550-project/detail?sid="+ headline.getStoryid() + "&uid=" + username + "\">Details...</a> <br><br><br>");
+		}
+		
+		return out;
+	}
+	
+	public static String getPopularSearch(LinkedList<String> words, String username, int i){
+		String out = "";
+		
+		DatabaseReader dr = new DatabaseReader();
+		
+		LinkedList<Story> newspaper = dr.getStoriesByPopular();
 		
 		Iterator<Story> iter = newspaper.iterator();
 		Story headline;

@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Locale;
+
 
 
 public class ViewFriendServlet extends HttpServlet{
@@ -59,7 +65,7 @@ public class ViewFriendServlet extends HttpServlet{
 		if(pending == false){
 		for(int x = 0; x < users.size(); x++){
 			out += "Name: "+ users.get(x).getUsername()+ " <br>";
-			out += "Age: "+ users.get(x).getBirthday()+ " <br>";
+			out += "Age: "+ getAgeByDate(users.get(x).getBirthday())+ " <br>";
 			out += "Location: "+users.get(x).getLocation()+ " <br>";
 			out += "Profession: "+users.get(x).getProfession()+ " <br><br>";
 		}		
@@ -82,5 +88,28 @@ public class ViewFriendServlet extends HttpServlet{
 		
 		return out;
 	}
-
+	
+	public static int getAgeByDate(String bday){
+		int result = 0;	
+		SimpleDateFormat dateF = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+		Date birthday = dateF.parse(bday);
+		Calendar age = Calendar.getInstance(Locale.getDefault());
+		age.setTimeInMillis(Math.abs(birthday.getTime()-System.currentTimeMillis()));
+		result = age.get(Calendar.YEAR)-1970;
+		
+		if(age.get(Calendar.MONTH) > 0 || age.get(Calendar.DAY_OF_MONTH) > 0){
+			result++;
+		}
+		
+		return result;
+		
+		} catch (ParseException e){
+			e.printStackTrace();
+			return 0;
+		}
+		
+		
+	}
+	
 }
