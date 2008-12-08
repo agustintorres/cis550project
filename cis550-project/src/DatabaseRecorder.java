@@ -35,6 +35,18 @@ public class DatabaseRecorder {
 				PreparedStatement pstmt = conn.prepareStatement(myQuery);
 				System.out.println(pstmt);
 				pstmt.executeUpdate();
+				String myVotes = ("DELETE FROM VOTES WHERE storyid = " + current.getLinkid());				
+				pstmt = conn.prepareStatement(myVotes);
+				System.out.println(pstmt);
+				pstmt.executeUpdate();
+				String myComments = ("DELETE FROM COMMENTS WHERE storyid = " + current.getLinkid());				
+				 pstmt = conn.prepareStatement(myComments);
+				System.out.println(pstmt);
+				pstmt.executeUpdate();
+				String myIndex = ("DELETE FROM INVINDEX WHERE docid = " + current.getLinkid());				
+				 pstmt = conn.prepareStatement(myIndex);
+				System.out.println(pstmt);
+				pstmt.executeUpdate();
 				System.out.println("query was executed successfully!");
 				pstmt.close();
 			}
