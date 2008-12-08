@@ -32,7 +32,7 @@ public class IndexGeneratorServlet extends HttpServlet {
 		out.println("<body>");
 		
 		HttpSession session = req.getSession();
-		String username = "notloggedin";
+		String username = "";
 		if(session.isNew() || session.getAttribute("username") == null) {
 			out.println("<p>Welcome!</p>");
 		} else {

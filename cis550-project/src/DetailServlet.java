@@ -41,7 +41,7 @@ public class DetailServlet extends HttpServlet {
 		out.println("</title>");
 		out.println("<body>");
 		if(theUser.equals("")){
-		out.println("<br> <h1> <b> YOU ARE NOT LOGGED IN. YOU CANNOT DO ANYTHING </b> </h1> <br>");
+		out.println("<br> Log in to comment, vote, or post! <br>");
 		}
 		out.println("<form method=\"POST\" action=\"SearchServlet\"/>" +
 					"Search: <input name=\"searchText\" type=\"text\" /> <br>" +

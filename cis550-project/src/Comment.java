@@ -63,7 +63,7 @@ public class Comment {
 		public String toHtml(){
 			String outHtml = "<br>";
 			
-			outHtml += (getAuthor() + " at " + getCommenttime() + ": " + getText() + ". <br>");
+			outHtml += (getAuthor() + " at " + getCommenttime() + ": " + getText() + ". ");
 			
 			return outHtml;
 		}
