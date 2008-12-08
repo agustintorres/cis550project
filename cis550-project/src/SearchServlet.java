@@ -48,7 +48,7 @@ public class SearchServlet extends HttpServlet {
 		out.println(PageGenerator.getMenuBar());
 		out.println("<br>");
 		
-		out.println("<b>Publishing complete</b><br><br>");
+		out.println("<b>Search results</b><br><br>");
 
 		if(searchType.equals("Keyword")){
 			out.println(getKeywordSearch(words, name, 10));
