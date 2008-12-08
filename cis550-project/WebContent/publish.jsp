@@ -34,7 +34,12 @@ Category:
   <option value ="News">News</option>
   <option value ="Sports">Sports</option>
   <option value ="Politics">Politics</option>
+  <option value ="Politics">Technology</option>
   <option value ="Misc">Misc</option>
+  <option value ="Science">Science</option>
+  <option value ="Lifestyle">Lifestyle</option>
+  <option value ="Entertainment">Entertainment</option>
+  <option value ="Business">Business</option>
 </select> <br>
 
 Private:
