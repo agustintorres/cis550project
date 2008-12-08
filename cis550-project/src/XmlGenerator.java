@@ -117,6 +117,7 @@ public class XmlGenerator extends HttpServlet {
 			out += ("<title>" + headline.getTitle() + "</title> \n");		
 			out += ("<link>" + headline.getURL() + "</link> \n");	
 			out += ("<description>" + headline.getDescription() + "</description> \n");
+			out += ("<author>"+ headline.getName() + "</author>" );
 			out += ("</item>");
 			out += ("\n");
 		}
@@ -128,7 +129,7 @@ public class XmlGenerator extends HttpServlet {
 			headline = iter.next();
 			out += ("<item> \n");
 			out += ("<tag>Vote</tag> \n");
-			out += ("<title> Voted on: " + headline.getTitle() + "</title> \n");		
+			out += ("<title>" + username + " voted on: " + headline.getTitle() + "</title> \n");		
 			out += ("<link>" + headline.getURL() + "</link> \n");			
 			out += ("<description>" + headline.getDescription() + "</description> \n");
 			out += ("</item>");

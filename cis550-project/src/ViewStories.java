@@ -64,7 +64,7 @@ public class ViewStories extends HttpServlet {
 		DatabaseReader dr = new DatabaseReader();
 		ArrayList<Story> newspaper;
 		
-		newspaper = dr.getStories(i);
+		newspaper = dr.getStories(i, 0, 1);
 		
 		///////////////////////////////////////////
 		Iterator<Story> iter = newspaper.iterator();
